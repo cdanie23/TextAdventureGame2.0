@@ -1,0 +1,6 @@
+Creaky Castle Gate,After your long journey to explore the Creaky Castle in hopes of finding the riches you have arrived at the front gate,Move Forward,Creaky Castle Halls(Forward),Safe
+Creaky Castle Halls,You lower the gates from the lever and step into the long hallway of the castle in front of you is a fork in the hallway,Move Left&Move Right,Creaky Castle Ball Room(Left)&Creaky Castle Dining Room(Right),Safe
+Creaky Castle Dining Room,You enter the dining room and the food is expired and the putrid smell fills the air to your left is a door with a hallow sounding room behind it,Move Left&Move Backward,Creaky Castle Trap Room(Left)&Creaky Castle Halls(Backward),Safe
+Creaky Castle Trap Room,You enter the hallow room and the floor falls out beneath you as you plummet to your death,none,none(),Trap,100
+Creaky Castle Ball Room,You enter the ball room and music is playing but there are no people where has everyone gone? To your right is a door with a shiny gold glare coming from beneath the door,Move Right&Move Backward,Creaky Castle Treasury(Right)&Creaky Castle Halls(Backward),Safe
+Creaky Castle Treasury,Long and behold you find the treasure that you are looking for hooorayy!,none,none(),Goal

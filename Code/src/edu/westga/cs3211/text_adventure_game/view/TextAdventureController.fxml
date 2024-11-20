@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane minHeight="279.0" minWidth="600.0" prefHeight="279.0" prefWidth="651.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.westga.cs3211.text_adventure_game.view.MainWindow">
+   <children>
+      <ComboBox fx:id="actionsComboBox" layoutX="358.0" layoutY="174.0" prefWidth="150.0" />
+      <Button fx:id="takeActionButton" layoutX="521.0" layoutY="174.0" mnemonicParsing="false" onAction="#takeActionButtonClick" text="Take Action" />
+      <Label fx:id="locationDescriptionLabel" layoutX="35.0" layoutY="43.0" text="Current Location Description" />
+      <TextArea fx:id="locationDescriptionTextArea" editable="false" layoutX="35.0" layoutY="60.0" prefHeight="109.0" prefWidth="279.0" wrapText="true" />
+      <Label layoutX="456.0" layoutY="152.0" text="Actions" />
+      <TextArea fx:id="actionsDescriptionTextArea" editable="false" layoutX="376.0" layoutY="60.0" prefHeight="83.0" prefWidth="200.0" wrapText="true" />
+      <Label layoutX="376.0" layoutY="43.0" text=" Available Actions Description" />
+      <Label layoutX="35.0" layoutY="178.0" text="Player Status" />
+      <TextArea fx:id="playerStatusTextArea" editable="false" layoutX="35.0" layoutY="199.0" prefHeight="51.0" prefWidth="279.0" wrapText="true" />
+   </children>
+</AnchorPane>

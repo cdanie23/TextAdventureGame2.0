@@ -1,0 +1,34 @@
+Generate New Maps 
+
+Context 
+
+	Player has completed an existing map or triggers an event requiring a new map(eg., start of the game or end). 
+	The game has a system to procedurally or manually generate new maps. 
+
+Primary Flow 
+
+	1. User reaches a point where a new map is needed (e.g., completes old map, selects "Generate New Map" action). 
+	
+	2. System generates a new map based on predefined parameters (e.g., difficulty, theme, hazards, short or long). 
+	
+	3. System updates the player’s location to the starting point of the new map. 
+	
+	4. System displays the description of the new location and available actions. 
+
+Alternative Flows 
+
+	 New map generation fails (e.g., corrupted or incomplete parameters): 
+	 
+		A3. System detects an error in map generation. 
+		
+		A4. System displays an error message and provides options (e.g., retry, load default map). 
+		
+		A5. System returns to the primary flow’s step 3 after resolving the issue. 
+		
+	 Player cancels new map generation: 
+
+		A2. User decides not to proceed with new map generation (e.g., selects "Cancel" option). 
+		
+		A3. System regenerates the current map. 
+		
+		A4. System returns to primary flow's step 3

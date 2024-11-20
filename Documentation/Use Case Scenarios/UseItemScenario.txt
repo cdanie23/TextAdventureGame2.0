@@ -1,0 +1,31 @@
+Use Item from Inventory 
+
+Context 
+
+	Player has one or more items in their inventory. 
+
+	The current location and/or player status may require the use of an item (e.g., healing potion, key for a door). 
+
+Primary Flow 
+
+	1. User selects an item from the inventory. 
+
+	2. System verifies that the item can be used in the current context. 
+
+	3. System applies the item’s effect (e.g., heals health, unlocks a door). 
+
+	4. System updates the player status and/or location based on the effect of the item. 
+
+	5. System displays updated status or new location description. 
+
+	6. System identifies available actions based on updated status/location and inventory. 
+
+Alternative Flows 
+
+	Item cannot be used in the current context: 
+
+		A2. System checks item usage rules and determines the item cannot be used. 
+
+		A3. System displays a message indicating the item is not usable in the current context. 
+
+		A4. System returns to the primary flow's step 6. 

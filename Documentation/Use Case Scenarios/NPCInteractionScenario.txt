@@ -1,0 +1,36 @@
+Interact with an NPC at a Location 
+
+Context 
+
+	Player is in a location with one or more NPCs. 
+	NPC interaction may involve dialogue, trading, or triggering quests. 
+
+Primary Flow 
+
+	1. System displays the available interaction options (e.g., talk, trade, fight, accept quest). 
+	
+	2. User selects an interaction option. 
+	
+	3. System processes the selected interaction (e.g., updates dialogue, starts a trade, initiates combat). 
+	
+	4. System updates player status, inventory, or quest log based on the interaction outcome. 
+	
+	5. System displays a message or changes based on the outcome of the interaction. 
+	
+Alternative Flows
+ 
+	NPC has no interaction options available: 
+	
+		A3. System detects the NPC has no available interactions (e.g., already talked, traded, or completed quest). 
+		
+		A4. System displays a message indicating no interaction is possible. 
+		
+		A5. System returns to the primary flow’s step 5. 
+
+	NPC interaction fails (e.g., insufficient resources): 
+	
+		A4. System checks the requirements for the selected interaction. 
+		
+		A5. System determines the player does not meet the requirements (e.g., lacks currency or items). 
+		
+		A6. System returns to the primary flow's step 5. 

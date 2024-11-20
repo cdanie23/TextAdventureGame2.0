@@ -1,0 +1,58 @@
+Take Move Action
+
+Context
+
+	Player is in a location and has been displayed the location description and available actions
+
+	World has a set of (interconnected) locations with some hazard locations and at least one goal location
+
+
+
+Primary Flow
+
+	1.	User selects a move action
+
+	2.	System does not detect any hazards/goal in the new location
+
+	3.	System updates players location
+
+	4.	System displays new location description
+
+	5.	System identifies available actions based on location and plater status/inventory
+
+	6.	System displays available actions
+
+
+
+Alternative Flows
+
+	Player enters hazard location and does not die
+
+		A2.	System detects a hazard in the new location
+
+		A3.	System applies the damage from the hazard to the player
+
+		A4.	System updates player status
+
+		A5.	System checks the player status is alive
+
+		A6.	Return to primary flow step 3
+
+	Player enters hazard location and dies
+
+		A2.	System detects a hazard in the new location
+
+		A3.	System applies the damage from the hazard to the player
+
+		A4.	System updates player status
+
+		A5.	System checks the player status is dead
+
+		A6.	System displays game over message based on new location’s hazard
+
+	Player enters goal location and wins
+
+		A2.	System detects a goal in the new location
+
+		A3.	Display a win screen
+
