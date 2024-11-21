@@ -37,9 +37,6 @@ public class MainWindow {
 	private TextArea locationDescriptionTextArea;
 
 	@FXML
-	private TextArea playerStatusTextArea;
-
-	@FXML
 	private Button takeActionButton;
 	private ObjectProperty<Action> selectedActionProperty;
 	
@@ -78,7 +75,7 @@ public class MainWindow {
 		this.actionsComboBox.itemsProperty().bind(this.viewModel.getActionsListProperty());
 		this.actionsDescriptionTextArea.textProperty().bind(this.viewModel.getActionsDescriptionProperty());
 		this.locationDescriptionTextArea.textProperty().bind(this.viewModel.getLocationDescriptionProperty());
-		this.playerStatusTextArea.textProperty().bind(this.viewModel.getPlayerStatusDescriptionProperty());
+		//this.playerStatusTextArea.textProperty().bind(this.viewModel.getPlayerStatusDescriptionProperty());
 		this.viewModel.getSelectedActionProperty().bindBidirectional(this.selectedActionProperty);
 	}
 	
