@@ -3,6 +3,7 @@ package edu.westga.cs3211.text_adventure_game.model;
 import java.io.File;
 import java.util.List;
 
+import edu.westga.cs3211.text_adventure_game.datatier.ItemReader;
 import edu.westga.cs3211.text_adventure_game.datatier.LocationReader;
 
 /**
@@ -15,8 +16,10 @@ public class GameManager {
 	private static final String LOCATIONS_TXT_FILE = "Locations.txt";
 	private Player player;
 	private List<Location> allLocations;
+	private List<Item> allItems;
 	private Location currLocation;
 	private LocationReader locationReader;
+	private ItemReader itemReader;
 	private Boolean playerHasWon;
 	
 	/**
@@ -25,9 +28,15 @@ public class GameManager {
 	 */
 	public GameManager() {
 		this.player = new Player();
-		File file = new File(LOCATIONS_TXT_FILE);
-		this.locationReader = new LocationReader(file);
+		
+		File locationFile = new File(LOCATIONS_TXT_FILE);
+		this.locationReader = new LocationReader(locationFile);
 		this.allLocations = this.locationReader.readLocations();
+		
+		File itemFile = new File("Items.txt");
+		this.itemReader = new ItemReader(itemFile);
+		this.allItems = this.itemReader.readItems();
+		
 		this.currLocation = this.allLocations.get(0);
 		this.playerHasWon = false;
 	}
