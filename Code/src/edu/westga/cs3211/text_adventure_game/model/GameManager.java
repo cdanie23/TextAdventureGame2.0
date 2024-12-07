@@ -1,6 +1,7 @@
 package edu.westga.cs3211.text_adventure_game.model;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import edu.westga.cs3211.text_adventure_game.datatier.ItemReader;
@@ -17,6 +18,7 @@ public class GameManager {
 	private Player player;
 	private List<Location> allLocations;
 	private List<Item> allItems;
+	private List<Action> allActions;
 	private Location currLocation;
 	private LocationReader locationReader;
 	private ItemReader itemReader;
@@ -27,7 +29,6 @@ public class GameManager {
 	 * @postcondition player != null && locationReader != null && allLocations != null && currentLocation != null
 	 */
 	public GameManager() {
-		this.player = new Player();
 		
 		File locationFile = new File(LOCATIONS_TXT_FILE);
 		this.locationReader = new LocationReader(locationFile);
@@ -37,8 +38,21 @@ public class GameManager {
 		this.itemReader = new ItemReader(itemFile);
 		this.allItems = this.itemReader.readItems();
 		
+		this.setupPlayer();
 		this.currLocation = this.allLocations.get(0);
 		this.playerHasWon = false;
+		
+		this.setupActions();
+	}
+	
+	private void setupActions() {
+		this.allActions = this.currLocation.getActions();
+	}
+	
+	private void setupPlayer() {
+		ArrayList<Item> startingItems = new ArrayList<Item>();
+		startingItems.add(this.allItems.get(5));
+		this.player = new Player(startingItems);
 	}
 	
 	/**
@@ -46,7 +60,7 @@ public class GameManager {
 	 * @return the collection of actions
 	 */
 	public List<Action> getActions() {
-		return this.currLocation.getActions();
+		return this.allActions;
 	}
 	
 	/**
@@ -73,7 +87,7 @@ public class GameManager {
 		if (this.player.getIsDead()) {
 			return YOU_ARE_DEAD_MSG;
 		}
-		return "Health: " + this.player.getHealth();
+		return String.valueOf(this.player.getHealth());
 	}
 	
 	/**
@@ -82,39 +96,33 @@ public class GameManager {
 	 * @precondition: action != null
 	 * @postcondition: this.currLocation == newLocation
 	 */
-	public void updateLocation(MoveAction action) {
+	public void updateLocation(Move action) {
 		if (action == null) {
 			throw new IllegalArgumentException(Location.ACTIONS_CANNOT_BE_NULL);
 		}
-		Location newLocation = null;
-		String nameOfNewLocation = null;
-		
-		if (action instanceof Forward) {
-			nameOfNewLocation = this.currLocation.getAdjacentLocations().get(Direction.Forward);
+		 
+		this.currLocation = action.takeAction(this.currLocation.getAdjacentLocations(), this.allLocations);
+		this.checkForTrapLocation();
+		this.checkForGoalLocation(); 
+		this.setupActions();
+	}
+	
+	/**
+	 * Use a players item out of their inventory
+	 * @param action the action to take on the item
+	 * @return true or false based on if the action was completed
+	 */
+	public Boolean usePlayerActionableItem(ActionableItem action) {
+		if (action == null) {
+			throw new IllegalArgumentException("action cannot be null");
 		}
-		if (action instanceof Left) {
-			nameOfNewLocation = this.currLocation.getAdjacentLocations().get(Direction.Left);
-		}
-		if (action instanceof Right) {
-			nameOfNewLocation = this.currLocation.getAdjacentLocations().get(Direction.Right);
-		}
-		if (action instanceof Backward) {
-			nameOfNewLocation = this.currLocation.getAdjacentLocations().get(Direction.Backward);
-		}
-		
-		for (Location location : this.allLocations) {
-			if (location.getName().equals(nameOfNewLocation)) {
-				newLocation = location;
-			}
-		}
-		this.currLocation = newLocation;
-		this.checkForTrapLocation(newLocation);
-		this.checkForGoalLocation(newLocation); 
+		this.player.getInventory().remove(action.getItem());
+		return action.takeAction(this.player);
 	}
 
-	private void checkForTrapLocation(Location newLocation) {
-		if (newLocation instanceof TrapLocation) {
-			TrapLocation trapLocation = (TrapLocation) newLocation;
+	private void checkForTrapLocation() {
+		if (this.currLocation instanceof TrapLocation) {
+			TrapLocation trapLocation = (TrapLocation) this.currLocation;
 			this.applyDamageInflicted(trapLocation);
 		}
 	}
@@ -126,8 +134,8 @@ public class GameManager {
 		this.player.setHealth(newHealth);
 	}
 	
-	private void checkForGoalLocation(Location newLocation) {
-		if (newLocation.getLocationType() == LocationType.Goal) {
+	private void checkForGoalLocation() {
+		if (this.currLocation.getLocationType() == LocationType.Goal) {
 			this.playerHasWon = true;
 		}
 	}
@@ -169,11 +177,11 @@ public class GameManager {
 	 * @return the description 
 	 */
 	public String getAvailableActionsDescription() {
-		String availableActionDescription = "";
-		for (Action action : this.currLocation.getActions()) {
-			availableActionDescription += action.getDescription() + System.lineSeparator();
+		StringBuilder actionDescriptions = new StringBuilder();
+		for (Action action : this.allActions) {
+			actionDescriptions.append(action.getDescription() + System.lineSeparator());
 		}
-		return availableActionDescription;
+		return actionDescriptions.toString();
 	}
 	/**
 	 * Gets if the player has won

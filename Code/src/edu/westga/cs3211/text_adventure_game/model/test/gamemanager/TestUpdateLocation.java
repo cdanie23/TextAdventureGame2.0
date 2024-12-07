@@ -4,11 +4,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-import edu.westga.cs3211.text_adventure_game.model.Backward;
-import edu.westga.cs3211.text_adventure_game.model.Forward;
+import edu.westga.cs3211.text_adventure_game.model.Direction;
 import edu.westga.cs3211.text_adventure_game.model.GameManager;
-import edu.westga.cs3211.text_adventure_game.model.Left;
-import edu.westga.cs3211.text_adventure_game.model.Right;
+import edu.westga.cs3211.text_adventure_game.model.Move;
 
 class TestUpdateLocation {
 
@@ -16,7 +14,7 @@ class TestUpdateLocation {
 	void testUpdateLocationForward() {
 		GameManager gameManager = new GameManager();
 		
-		gameManager.updateLocation(new Forward());
+		gameManager.updateLocation(new Move(Direction.Forward));
 		
 		String nameOfNewLocation = gameManager.getLocationName();
 		
@@ -28,8 +26,8 @@ class TestUpdateLocation {
 	void testUpdateLocationLeft() {
 		GameManager gameManager = new GameManager();
 		
-		gameManager.updateLocation(new Forward());
-		gameManager.updateLocation(new Left());
+		gameManager.updateLocation(new Move(Direction.Forward));
+		gameManager.updateLocation(new Move(Direction.Left));
 		
 		String nameOfNewLocation = gameManager.getLocationName();
 		
@@ -41,8 +39,8 @@ class TestUpdateLocation {
 	void testUpdateLocationRight() {
 		GameManager gameManager = new GameManager();
 		
-		gameManager.updateLocation(new Forward());
-		gameManager.updateLocation(new Right());
+		gameManager.updateLocation(new Move(Direction.Forward));
+		gameManager.updateLocation(new Move(Direction.Right));
 		
 		String nameOfNewLocation = gameManager.getLocationName();
 		
@@ -53,9 +51,9 @@ class TestUpdateLocation {
 	void testUpdateLocationBackward() {
 		GameManager gameManager = new GameManager();
 		
-		gameManager.updateLocation(new Forward());
-		gameManager.updateLocation(new Right());
-		gameManager.updateLocation(new Backward());
+		gameManager.updateLocation(new Move(Direction.Forward));
+		gameManager.updateLocation(new Move(Direction.Right));
+		gameManager.updateLocation(new Move(Direction.Backward));
 		
 		String nameOfNewLocation = gameManager.getLocationName();
 		
@@ -72,9 +70,9 @@ class TestUpdateLocation {
 	public void testWhenTrapLocation() {
 		GameManager gameManager = new GameManager();
 		
-		gameManager.updateLocation(new Forward());
-		gameManager.updateLocation(new Right());
-		gameManager.updateLocation(new Left());
+		gameManager.updateLocation(new Move(Direction.Forward));
+		gameManager.updateLocation(new Move(Direction.Right));
+		gameManager.updateLocation(new Move(Direction.Left));
 		
 		String nameOfNewLocation = gameManager.getLocationName();
 		assertEquals(nameOfNewLocation, "Creaky Castle Trap Room");
@@ -84,9 +82,9 @@ class TestUpdateLocation {
 	public void testWhenGoalLocation() {
 		GameManager gameManager = new GameManager();
 		
-		gameManager.updateLocation(new Forward());
-		gameManager.updateLocation(new Left());
-		gameManager.updateLocation(new Right());
+		gameManager.updateLocation(new Move(Direction.Forward));
+		gameManager.updateLocation(new Move(Direction.Left));
+		gameManager.updateLocation(new Move(Direction.Right));
 		
 		String nameOfNewLocation = gameManager.getLocationName();
 		assertEquals(nameOfNewLocation, "Creaky Castle Treasury");

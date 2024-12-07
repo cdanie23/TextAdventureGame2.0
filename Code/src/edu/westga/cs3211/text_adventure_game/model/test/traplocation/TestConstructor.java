@@ -9,8 +9,8 @@ import org.junit.jupiter.api.Test;
 
 import edu.westga.cs3211.text_adventure_game.model.Action;
 import edu.westga.cs3211.text_adventure_game.model.Direction;
-import edu.westga.cs3211.text_adventure_game.model.Forward;
 import edu.westga.cs3211.text_adventure_game.model.LocationType;
+import edu.westga.cs3211.text_adventure_game.model.Move;
 import edu.westga.cs3211.text_adventure_game.model.TrapLocation;
 
 class TestConstructor {
@@ -20,7 +20,7 @@ class TestConstructor {
 		String name = "Creaky Castle Trap Room";
 		String description = "The creaky castle trap room";
 		ArrayList<Action> actions = new ArrayList<Action>();
-		actions.add(new Forward());
+		actions.add(new Move(Direction.Forward));
 		HashMap<Direction, String> adjacentLocations = new HashMap<Direction, String>();
 		adjacentLocations.put(Direction.Forward, "Creaky Castle Halls");
 		LocationType locationType = LocationType.Trap;
@@ -41,7 +41,7 @@ class TestConstructor {
 		String name = "Creaky Castle Trap Room";
 		String description = "The creaky castle trap room";
 		ArrayList<Action> actions = new ArrayList<Action>();
-		actions.add(new Forward());
+		actions.add(new Move(Direction.Forward));
 		HashMap<Direction, String> adjacentLocations = new HashMap<Direction, String>();
 		adjacentLocations.put(Direction.Forward, "Creaky Castle Halls");
 		LocationType locationType = LocationType.Trap;
@@ -57,7 +57,7 @@ class TestConstructor {
 		String name = "Creaky Castle Trap Room";
 		String description = "The creaky castle trap room";
 		ArrayList<Action> actions = new ArrayList<Action>();
-		actions.add(new Forward());
+		actions.add(new Move(Direction.Forward));
 		HashMap<Direction, String> adjacentLocations = new HashMap<Direction, String>();
 		adjacentLocations.put(Direction.Forward, "Creaky Castle Halls");
 		LocationType locationType = LocationType.Trap;

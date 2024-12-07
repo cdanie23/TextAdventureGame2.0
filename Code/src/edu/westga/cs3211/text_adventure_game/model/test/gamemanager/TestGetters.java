@@ -8,8 +8,8 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import edu.westga.cs3211.text_adventure_game.model.Action;
-import edu.westga.cs3211.text_adventure_game.model.Forward;
 import edu.westga.cs3211.text_adventure_game.model.GameManager;
+import edu.westga.cs3211.text_adventure_game.model.Move;
 
 class TestGetters {
 
@@ -19,7 +19,7 @@ class TestGetters {
 		
 		List<Action> allActions = gameManager.getActions();
 		
-		assertTrue(allActions.get(0) instanceof Forward);
+		assertTrue(allActions.get(0) instanceof Move);
 	}
 	@Test
 	void testGetLocationDescription() {
@@ -31,7 +31,7 @@ class TestGetters {
 	void testGetPlayerStatusWhenAlive() {
 		GameManager gameManager = new GameManager();
 		
-		assertEquals(gameManager.getPlayerStatus(), "Health: 100");
+		assertEquals(gameManager.getPlayerStatus(), "100");
 	}
 	@Test
 	void testGetPlayerStatsWhenDead() {

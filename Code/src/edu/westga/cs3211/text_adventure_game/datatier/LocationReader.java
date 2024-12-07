@@ -8,13 +8,13 @@ import java.util.List;
 import java.util.Scanner;
 
 import edu.westga.cs3211.text_adventure_game.model.Action;
-import edu.westga.cs3211.text_adventure_game.model.Backward;
+
 import edu.westga.cs3211.text_adventure_game.model.Direction;
-import edu.westga.cs3211.text_adventure_game.model.Forward;
-import edu.westga.cs3211.text_adventure_game.model.Left;
+
 import edu.westga.cs3211.text_adventure_game.model.Location;
 import edu.westga.cs3211.text_adventure_game.model.LocationType;
-import edu.westga.cs3211.text_adventure_game.model.Right;
+import edu.westga.cs3211.text_adventure_game.model.Move;
+
 import edu.westga.cs3211.text_adventure_game.model.TrapLocation;
 
 /**
@@ -24,6 +24,7 @@ import edu.westga.cs3211.text_adventure_game.model.TrapLocation;
  * @version Fall 2024
  */
 public class LocationReader {
+	private static final String MOVE_BACKWARD = "Move Backward";
 	private static final String BACKWARD = "Backward";
 	private static final String RIGHT = "Right";
 	private static final String LEFT = "Left";
@@ -75,16 +76,16 @@ public class LocationReader {
 				String[] actionsTokens = tokens[2].split(REGEX_SPLITTER);
 				for (String action : actionsTokens) {
 					if (action.equals(MOVE_FORWARD)) {
-						actions.add(new Forward());
+						actions.add(new Move(Direction.Forward));
 					}
 					if (action.equals(MOVE_LEFT)) {
-						actions.add(new Left());
+						actions.add(new Move(Direction.Left));
 					}
 					if (action.equals(MOVE_RIGHT)) {
-						actions.add(new Right());
+						actions.add(new Move(Direction.Right));
 					}
-					if (action.equals("Move Backward")) {
-						actions.add(new Backward());
+					if (action.equals(MOVE_BACKWARD)) {
+						actions.add(new Move(Direction.Backward));
 					}
 				}
 				HashMap<Direction, String> adjacentLocations = new HashMap<Direction, String>();

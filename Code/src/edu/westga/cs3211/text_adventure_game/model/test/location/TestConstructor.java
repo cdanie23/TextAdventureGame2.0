@@ -9,9 +9,9 @@ import org.junit.jupiter.api.Test;
 
 import edu.westga.cs3211.text_adventure_game.model.Action;
 import edu.westga.cs3211.text_adventure_game.model.Direction;
-import edu.westga.cs3211.text_adventure_game.model.Forward;
 import edu.westga.cs3211.text_adventure_game.model.Location;
 import edu.westga.cs3211.text_adventure_game.model.LocationType;
+import edu.westga.cs3211.text_adventure_game.model.Move;
 
 class TestConstructor {
 
@@ -20,7 +20,7 @@ class TestConstructor {
 		String name = "Creaky Castle Gate";
 		String description = "The creaky castle gates";
 		ArrayList<Action> actions = new ArrayList<Action>();
-		actions.add(new Forward());
+		actions.add(new Move(Direction.Forward));
 		HashMap<Direction, String> adjacentLocations = new HashMap<Direction, String>();
 		adjacentLocations.put(Direction.Forward, "Creaky Castle Halls");
 		LocationType locationType = LocationType.Safe;
@@ -40,7 +40,7 @@ class TestConstructor {
 		String name = null;
 		String description = "The creaky castle gates";
 		ArrayList<Action> actions = new ArrayList<Action>();
-		actions.add(new Forward());
+		actions.add(new Move(Direction.Forward));
 		HashMap<Direction, String> adjacentLocations = new HashMap<Direction, String>();
 		adjacentLocations.put(Direction.Forward, "Creaky Castle Halls");
 		LocationType locationType = LocationType.Safe;
@@ -52,7 +52,7 @@ class TestConstructor {
 		String name = "Creaky Castle Gate";
 		String description = null;
 		ArrayList<Action> actions = new ArrayList<Action>();
-		actions.add(new Forward());
+		actions.add(new Move(Direction.Forward));
 		HashMap<Direction, String> adjacentLocations = new HashMap<Direction, String>();
 		adjacentLocations.put(Direction.Forward, "Creaky Castle Halls");
 		LocationType locationType = LocationType.Safe;
@@ -78,7 +78,7 @@ class TestConstructor {
 		String name = "Creaky Castle Gate";
 		String description = "The creaky castle gates";
 		ArrayList<Action> actions = new ArrayList<Action>();
-		actions.add(new Forward());
+		actions.add(new Move(Direction.Forward));
 		HashMap<Direction, String> adjacentLocations = new HashMap<Direction, String>();
 		adjacentLocations.put(Direction.Forward, "Creaky Castle Halls");
 		LocationType locationType = null;
@@ -91,7 +91,7 @@ class TestConstructor {
 		String name = "Creaky Castle Gates";
 		String description = "The creaky castle gates";
 		ArrayList<Action> actions = new ArrayList<Action>();
-		actions.add(new Forward());
+		actions.add(new Move(Direction.Forward));
 		HashMap<Direction, String> adjacentLocations = null;
 		LocationType locationType = LocationType.Safe;
 		

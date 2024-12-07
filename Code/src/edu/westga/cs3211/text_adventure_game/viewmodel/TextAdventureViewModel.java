@@ -1,8 +1,15 @@
 package edu.westga.cs3211.text_adventure_game.viewmodel;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import edu.westga.cs3211.text_adventure_game.model.Action;
+import edu.westga.cs3211.text_adventure_game.model.ActionableItem;
+import edu.westga.cs3211.text_adventure_game.model.DropItem;
 import edu.westga.cs3211.text_adventure_game.model.GameManager;
-import edu.westga.cs3211.text_adventure_game.model.MoveAction;
+import edu.westga.cs3211.text_adventure_game.model.Item;
+import edu.westga.cs3211.text_adventure_game.model.Move;
+import edu.westga.cs3211.text_adventure_game.model.UseItem;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleListProperty;
@@ -20,13 +27,16 @@ import javafx.collections.FXCollections;
 public class TextAdventureViewModel {
 
 	private GameManager gameManager;
-
+ 
 	private StringProperty locationDescriptionProperty;
 	private StringProperty actionsDescriptionProperty;
 	private StringProperty playerStatusDescriptionProperty;
 
 	private ListProperty<Action> actionsListProperty;
 	private ObjectProperty<Action> selectedActionProperty;
+	
+	private ListProperty<Item> itemsListProperty;
+	private ObjectProperty<Item> selectedItemProperty;
 
 	/**
 	 * Instantiates an instance of the view model
@@ -45,6 +55,11 @@ public class TextAdventureViewModel {
 
 		this.actionsListProperty = new SimpleListProperty<Action>();
 		this.selectedActionProperty = new SimpleObjectProperty<Action>();
+		
+		this.itemsListProperty = new SimpleListProperty<Item>();
+		this.selectedItemProperty = new SimpleObjectProperty<Item>();
+		
+		this.itemsListProperty.setValue(FXCollections.observableList(this.gameManager.getPlayer().getInventory()));
 		this.update();
 	}
 
@@ -66,7 +81,9 @@ public class TextAdventureViewModel {
 		this.actionsDescriptionProperty.setValue(this.gameManager.getAvailableActionsDescription());
 		this.playerStatusDescriptionProperty.setValue(this.gameManager.getPlayerStatus());
 		this.actionsListProperty
-				.setValue(FXCollections.observableList(this.gameManager.getCurrLocation().getActions()));
+				.setValue(FXCollections.observableList(this.gameManager.getActions()));
+		this.itemsListProperty.setValue(FXCollections.observableList(this.gameManager.getPlayer().getInventory()));
+		
 	}
 
 	/**
@@ -93,11 +110,17 @@ public class TextAdventureViewModel {
 
 	public void takeAction() {
 		Action selectedAction = this.selectedActionProperty.getValue();
-		if (selectedAction instanceof MoveAction) {
-			MoveAction moveAction = (MoveAction) selectedAction;
+		if (selectedAction instanceof Move) {
+			Move moveAction = (Move) selectedAction;
 			this.gameManager.updateLocation(moveAction);
 		}
-		this.update();
+		if (selectedAction instanceof ActionableItem) {
+			ActionableItem itemAction = (ActionableItem) selectedAction;
+			this.gameManager.usePlayerActionableItem(itemAction);
+			this.removeOldUseActions();
+				
+		}
+		this.update(); 
 
 	}
 
@@ -152,5 +175,47 @@ public class TextAdventureViewModel {
 	 */
 	public GameManager getGameManager() {
 		return this.gameManager;
+	}
+
+	/**
+	 * Gets the items list property
+	 * @return the itemsListProperty
+	 */
+	public ListProperty<Item> getItemsListProperty() {
+		return this.itemsListProperty;
+	}
+
+	/**
+	 * Gets the selected item property
+	 * @return the selectedItemProperty
+	 */
+	public ObjectProperty<Item> getSelectedItemProperty() {
+		return this.selectedItemProperty;
+	}
+	
+	/**
+	 * Adds the selected items use actions to the available actions
+	 * and removes the older actions from the previous selection
+	 * @param item the item to add the actions for 
+	 */
+	public void addItemUseActions(Item item) {
+		this.removeOldUseActions();
+		this.gameManager.getActions().add(new UseItem(item));
+		this.gameManager.getActions().add(new DropItem(item));
+		this.update();
+	}
+	
+	private void removeOldUseActions() {
+		List<Action> flaggedActions = new ArrayList<Action>();
+		for (Action action : this.gameManager.getActions()) {
+			if ((action instanceof UseItem || action instanceof DropItem)) {
+				flaggedActions.add(action);
+			}
+		}
+		for (Action action : flaggedActions) {
+			this.gameManager.getActions().remove(action);
+		}
+		this.update();
+		
 	}
 }

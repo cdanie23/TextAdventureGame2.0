@@ -1,0 +1,9 @@
+Dagger,10,-20,10
+Broadsword,20,-25,20
+Halberd,30,-50,25
+Morning star,40,-75,60
+Arthur's Greatsword,60,-100,100
+Healing Potion,10,50,10
+Super Healing Potion,15,75,25
+Posion Potion,10,-50,5
+Super Posion Potion,15,-75,10
