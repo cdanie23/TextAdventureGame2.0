@@ -9,6 +9,7 @@ import edu.westga.cs3211.text_adventure_game.model.DropItem;
 import edu.westga.cs3211.text_adventure_game.model.GameManager;
 import edu.westga.cs3211.text_adventure_game.model.Item;
 import edu.westga.cs3211.text_adventure_game.model.Move;
+import edu.westga.cs3211.text_adventure_game.model.NpcInteract;
 import edu.westga.cs3211.text_adventure_game.model.UseItem;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.ObjectProperty;
@@ -22,7 +23,7 @@ import javafx.util.converter.NumberStringConverter;
 /**
  * The view model for the text adventure game
  * 
- * @author Colby
+ * @author Colby and Jacob
  * @version Fall 2024
  */
 public class TextAdventureViewModel {
@@ -114,7 +115,6 @@ public class TextAdventureViewModel {
 	/**
 	 * Takes the action selected
 	 */
-
 	public void takeAction() {
 		Action selectedAction = this.selectedActionProperty.getValue();
 		if (selectedAction instanceof Move) {
@@ -131,6 +131,11 @@ public class TextAdventureViewModel {
 			}
 			this.removeOldUseActions();
 		}
+		if (selectedAction instanceof NpcInteract) {
+	        NpcInteract npcAction = (NpcInteract) selectedAction;
+	        this.gameManager.interactWithNpc(npcAction);
+	    }
+		
 		this.update();
 
 	}

@@ -6,10 +6,11 @@ import java.util.List;
 
 import edu.westga.cs3211.text_adventure_game.datatier.ItemReader;
 import edu.westga.cs3211.text_adventure_game.datatier.LocationReader;
+import edu.westga.cs3211.text_adventure_game.datatier.NpcReader;
 
 /**
  * The game manager class
- * @author Colby
+ * @author Colby and Jacob
  * @version Fall 2024
  */
 public class GameManager {
@@ -24,7 +25,13 @@ public class GameManager {
 	private LocationReader locationReader;
 	private ItemReader itemReader;
 	private Boolean playerHasWon;
+
+	private NpcReader npcReader;
+	private List<Npc> allNpcs;
+	private NpcManager npcManager;
+
 	private String itemStatus;
+
 	
 	/**
 	 * Creates an instance of the game manager class
@@ -40,8 +47,14 @@ public class GameManager {
 		this.itemReader = new ItemReader(itemFile);
 		this.allItems = this.itemReader.readItems();
 		
+		File npcFile = new File("Npc.txt");
+		this.npcReader = new NpcReader(npcFile);
+		this.allNpcs = this.npcReader.readNpcs();
+		this.npcManager = new NpcManager(this.allNpcs);
+		
 		this.setupPlayer();
 		this.currLocation = this.allLocations.get(0);
+		this.npcManager.addNpcByIndex(0, 5, this.currLocation);
 		this.playerHasWon = false;
 		
 		this.setupActions();
@@ -164,11 +177,11 @@ public class GameManager {
 	public List<Location> getAllLocations() {
 		return this.allLocations;
 	}
+	
 	/**
 	 * Gets the current location
 	 * @return the current location
 	 */
-	
 	public Location getCurrLocation() {
 		return this.currLocation;
 	}
@@ -192,14 +205,23 @@ public class GameManager {
 		}
 		return actionDescriptions.toString();
 	}
+	
 	/**
 	 * Gets if the player has won
 	 * @return true or false based on if the player has won
 	 */
-	
 	public Boolean getPlayerHasWon() {
 		return this.playerHasWon;
 	}
+
+	
+	/**calls the player to interact with npc
+	 * 
+	 * @param npcAction the npc being interacted with
+	 */
+	public void interactWithNpc(NpcInteract npcAction) {
+		npcAction.takeAction(this.player);
+
 	/**
 	 * Gets the status of players items
 	 * @return the item status
