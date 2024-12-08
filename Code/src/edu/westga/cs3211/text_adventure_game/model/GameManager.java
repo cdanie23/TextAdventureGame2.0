@@ -213,15 +213,15 @@ public class GameManager {
 	public Boolean getPlayerHasWon() {
 		return this.playerHasWon;
 	}
-
 	
-	/**calls the player to interact with npc
+	/**
+	 * calls the player to interact with npc
 	 * 
 	 * @param npcAction the npc being interacted with
 	 */
 	public void interactWithNpc(NpcInteract npcAction) {
 		npcAction.takeAction(this.player);
-
+	}
 	/**
 	 * Gets the status of players items
 	 * @return the item status
