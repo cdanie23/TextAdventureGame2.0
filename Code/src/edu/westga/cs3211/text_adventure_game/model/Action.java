@@ -30,7 +30,6 @@ public abstract class Action {
 	 * 
 	 * @return the description
 	 */
-
 	public String getDescription() {
 		return this.description;
 	}

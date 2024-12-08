@@ -21,5 +21,4 @@ public class DropItem extends ActionableItem {
 	public Boolean takeAction(Damageable character) {
 		return character.getInventory().remove(super.getItem());
 	}
-	
 }

@@ -6,7 +6,7 @@ package edu.westga.cs3211.text_adventure_game.model;
  * @author Colby
  * @version Fall 2024
  */
-public abstract class ActionableItem extends Action{
+public abstract class ActionableItem extends Action {
 	private Item item;
 
 	/**
