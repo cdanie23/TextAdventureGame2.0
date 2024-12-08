@@ -29,6 +29,9 @@ public class MainWindow {
     private ComboBox<Action> actionsComboBox;
 	
 	@FXML
+    private Label coinsLabel;
+	
+	@FXML
 	private Label itemStatusLabel;
 
     @FXML
@@ -102,6 +105,8 @@ public class MainWindow {
 		this.viewModel.getSelectedActionProperty().bindBidirectional(this.selectedActionProperty);
 		this.inventoryListView.itemsProperty().bind(this.viewModel.getItemsListProperty());
 		this.itemStatusLabel.textProperty().bind(this.viewModel.getItemsStatusProperty());
+		this.coinsLabel.textProperty().bind(this.viewModel.getCoinsProperty());
+		this.currentLocationNameLabel.textProperty().bind(this.viewModel.getCurrentLocationNameProperty());
 	}
 	
 	private void setupListeners() {

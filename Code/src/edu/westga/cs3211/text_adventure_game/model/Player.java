@@ -8,7 +8,7 @@ import java.util.List;
  * @version Fall 2024
  */
 public class Player extends Damageable {
-	
+	private int coins;
 	/**
 	 * Creates an instance of a player
 	 * @param startingItems the starting items of the player
@@ -17,6 +17,7 @@ public class Player extends Damageable {
 	
 	public Player(List<Item> startingItems) {
 		super(100, startingItems);
+		this.coins = 0;
 	
 	}
 	/**
@@ -26,5 +27,21 @@ public class Player extends Damageable {
 	
 	public Boolean isEncumbered() {
 		return GameManager.MAX_WEIGHT <= this.getTotalWeight();
+	}
+	/**
+	 * Gets the coins
+	 * @return the coins
+	 */
+	
+	public int getCoins() {
+		return this.coins;
+	}
+	/**
+	 * Sets the coins
+	 * @param coins the coins to set
+	 */
+	
+	public void setCoins(int coins) {
+		this.coins = coins;
 	}
 }

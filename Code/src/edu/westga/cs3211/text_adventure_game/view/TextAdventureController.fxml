@@ -21,9 +21,9 @@
       <TextArea fx:id="locationDescriptionTextArea" editable="false" layoutX="35.0" layoutY="115.0" prefHeight="109.0" prefWidth="279.0" wrapText="true" />
       <Label layoutX="35.0" layoutY="240.0" text=" Available Actions Description" />
       <TextArea fx:id="actionsDescriptionTextArea" editable="false" layoutX="35.0" layoutY="257.0" prefHeight="83.0" prefWidth="279.0" wrapText="true" />
-      <Label layoutX="350.0" layoutY="98.0" text="Player Status" />
-      <Label layoutX="488.0" layoutY="98.0" text="Health: " />
-      <Label fx:id="healthLabel" layoutX="529.0" layoutY="98.0" text="100" />
+      <Label layoutX="409.0" layoutY="79.0" text="Player Status" />
+      <Label layoutX="477.0" layoutY="98.0" text="Health: " />
+      <Label fx:id="healthLabel" layoutX="541.0" layoutY="98.0" text="100" />
       <Label layoutX="351.0" layoutY="120.0" text="Inventory" />
       <Label layoutX="477.0" layoutY="120.0" text="Weight:" />
       <Label fx:id="weightTxtLabel" layoutX="521.0" layoutY="120.0" text="0 / 100" />
@@ -31,6 +31,8 @@
       <Label layoutX="36.0" layoutY="340.0" text="Actions" />
       <ComboBox fx:id="actionsComboBox" layoutX="36.0" layoutY="358.0" prefHeight="26.0" prefWidth="185.0" />
       <Button fx:id="takeActionButton" layoutX="234.0" layoutY="358.0" mnemonicParsing="false" onAction="#takeActionButtonClick" text="Take Action" />
-      <Label fx:id="itemStatusLabel" layoutX="351.0" layoutY="358.0" prefHeight="25.0" prefWidth="200.0" textAlignment="CENTER"/>
+      <Label fx:id="itemStatusLabel" layoutX="351.0" layoutY="358.0" prefHeight="25.0" prefWidth="200.0" textAlignment="CENTER" />
+      <Label layoutX="351.0" layoutY="98.0" text="Coins:" />
+      <Label fx:id="coinsLabel" layoutX="395.0" layoutY="98.0" />
    </children>
 </AnchorPane>
