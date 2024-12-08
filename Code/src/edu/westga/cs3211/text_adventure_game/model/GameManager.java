@@ -15,6 +15,7 @@ import edu.westga.cs3211.text_adventure_game.datatier.LocationReader;
 public class GameManager {
 	private static final String YOU_ARE_DEAD_MSG = "You are dead";
 	private static final String LOCATIONS_TXT_FILE = "Locations.txt";
+	public static final int MAX_WEIGHT = 100;
 	private Player player;
 	private List<Location> allLocations;
 	private List<Item> allItems;
@@ -23,6 +24,7 @@ public class GameManager {
 	private LocationReader locationReader;
 	private ItemReader itemReader;
 	private Boolean playerHasWon;
+	private String itemStatus;
 	
 	/**
 	 * Creates an instance of the game manager class
@@ -105,6 +107,7 @@ public class GameManager {
 		this.checkForTrapLocation();
 		this.checkForGoalLocation(); 
 		this.setupActions();
+		this.itemStatus = "";
 	}
 	
 	/**
@@ -115,6 +118,12 @@ public class GameManager {
 	public Boolean usePlayerActionableItem(ActionableItem action) {
 		if (action == null) {
 			throw new IllegalArgumentException("action cannot be null");
+		}
+		if (action instanceof DropItem) {
+			this.itemStatus = "You have dropped " + action.getItem().getName();
+		}
+		if (action instanceof UseItem) {
+			this.itemStatus = "You have used " + action.getItem().getName();
 		}
 		this.player.getInventory().remove(action.getItem());
 		return action.takeAction(this.player);
@@ -190,5 +199,13 @@ public class GameManager {
 	
 	public Boolean getPlayerHasWon() {
 		return this.playerHasWon;
+	}
+	/**
+	 * Gets the status of players items
+	 * @return the item status
+	 */
+	
+	public String getItemStatus() {
+		return this.itemStatus;
 	}
 }
