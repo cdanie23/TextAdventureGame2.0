@@ -31,5 +31,6 @@
       <Label layoutX="36.0" layoutY="340.0" text="Actions" />
       <ComboBox fx:id="actionsComboBox" layoutX="36.0" layoutY="358.0" prefHeight="26.0" prefWidth="185.0" />
       <Button fx:id="takeActionButton" layoutX="234.0" layoutY="358.0" mnemonicParsing="false" onAction="#takeActionButtonClick" text="Take Action" />
+      <Label fx:id="itemStatusLabel" layoutX="351.0" layoutY="358.0" prefHeight="25.0" prefWidth="200.0" textAlignment="CENTER"/>
    </children>
 </AnchorPane>

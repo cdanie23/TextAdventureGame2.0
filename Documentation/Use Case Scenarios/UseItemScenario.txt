@@ -4,21 +4,21 @@ Context
 
 	Player has one or more items in their inventory. 
 
-	The current location and/or player status may require the use of an item (e.g., healing potion, key for a door). 
+	The current location and/or player status may require the use of an item (e.g., attacking an enemy). 
 
 Primary Flow 
 
 	1. User selects an item from the inventory. 
 
-	2. System verifies that the item can be used in the current context. 
+	2. System verifies that the item can be used in the current context(e.g., an enemy can be attacked)
 
-	3. System applies the item’s effect (e.g., heals health, unlocks a door). 
+	3. System applies the item’s effect (e.g., heals health, damages an enemy). 
 
-	4. System updates the player status and/or location based on the effect of the item. 
+	4. System updates the player status and/or enemies based on the effect
 
-	5. System displays updated status or new location description. 
+	5. System displays updated item status or enemy status
 
-	6. System identifies available actions based on updated status/location and inventory. 
+	6. System identifies available actions based on updated status of location or enemies
 
 Alternative Flows 
 

@@ -31,6 +31,7 @@ public class TextAdventureViewModel {
 	private StringProperty locationDescriptionProperty;
 	private StringProperty actionsDescriptionProperty;
 	private StringProperty playerStatusDescriptionProperty;
+	private StringProperty itemsStatusProperty;
 
 	private ListProperty<Action> actionsListProperty;
 	private ObjectProperty<Action> selectedActionProperty;
@@ -52,6 +53,7 @@ public class TextAdventureViewModel {
 		this.locationDescriptionProperty = new SimpleStringProperty();
 		this.actionsDescriptionProperty = new SimpleStringProperty();
 		this.playerStatusDescriptionProperty = new SimpleStringProperty();
+		this.itemsStatusProperty = new SimpleStringProperty();
 
 		this.actionsListProperty = new SimpleListProperty<Action>();
 		this.selectedActionProperty = new SimpleObjectProperty<Action>();
@@ -83,7 +85,7 @@ public class TextAdventureViewModel {
 		this.actionsListProperty
 				.setValue(FXCollections.observableList(this.gameManager.getActions()));
 		this.itemsListProperty.setValue(FXCollections.observableList(this.gameManager.getPlayer().getInventory()));
-		
+		this.itemsStatusProperty.setValue(this.gameManager.getItemStatus());
 	}
 
 	/**
@@ -167,6 +169,14 @@ public class TextAdventureViewModel {
 	 */
 	public ObjectProperty<Action> getSelectedActionProperty() {
 		return this.selectedActionProperty;
+	}
+	
+	/**
+	 * Gets the items status property
+	 * @return the item status
+	 */
+	public StringProperty getItemsStatusProperty() {
+		return this.itemsStatusProperty;
 	}
 	
 	/**

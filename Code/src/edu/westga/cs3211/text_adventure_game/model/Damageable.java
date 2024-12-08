@@ -72,5 +72,16 @@ public abstract class Damageable {
 	public List<Item> getInventory() {
 		return this.inventory;
 	}
-
+	
+	/**
+	 * Gets the total weight
+	 * @return the total weight of the inventory
+	 */
+	public int getTotalWeight() {
+		int totalWeight = 0;
+		for (Item item : this.inventory) {
+			totalWeight += item.getWeight();
+		}
+		return totalWeight;
+	}
 }

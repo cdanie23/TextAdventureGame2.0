@@ -27,6 +27,9 @@ import javafx.scene.layout.AnchorPane;
 public class MainWindow {
 	@FXML
     private ComboBox<Action> actionsComboBox;
+	
+	@FXML
+	private Label itemStatusLabel;
 
     @FXML
     private TextArea actionsDescriptionTextArea;
@@ -98,6 +101,7 @@ public class MainWindow {
 		this.healthLabel.textProperty().bind(this.viewModel.getPlayerStatusDescriptionProperty());
 		this.viewModel.getSelectedActionProperty().bindBidirectional(this.selectedActionProperty);
 		this.inventoryListView.itemsProperty().bind(this.viewModel.getItemsListProperty());
+		this.itemStatusLabel.textProperty().bind(this.viewModel.getItemsStatusProperty());
 	}
 	
 	private void setupListeners() {
