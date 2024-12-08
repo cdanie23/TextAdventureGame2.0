@@ -18,6 +18,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
+import javafx.util.converter.NumberStringConverter;
 
 /**
  * The view model for the text adventure game
@@ -28,14 +29,17 @@ import javafx.collections.FXCollections;
 public class TextAdventureViewModel {
 
 	private GameManager gameManager;
- 
+
 	private StringProperty locationDescriptionProperty;
 	private StringProperty actionsDescriptionProperty;
 	private StringProperty playerStatusDescriptionProperty;
+	private StringProperty itemsStatusProperty;
+	private StringProperty coinsProperty;
+	private StringProperty currentLocationNameProperty;
 
 	private ListProperty<Action> actionsListProperty;
 	private ObjectProperty<Action> selectedActionProperty;
-	
+
 	private ListProperty<Item> itemsListProperty;
 	private ObjectProperty<Item> selectedItemProperty;
 
@@ -53,13 +57,16 @@ public class TextAdventureViewModel {
 		this.locationDescriptionProperty = new SimpleStringProperty();
 		this.actionsDescriptionProperty = new SimpleStringProperty();
 		this.playerStatusDescriptionProperty = new SimpleStringProperty();
+		this.itemsStatusProperty = new SimpleStringProperty();
+		this.coinsProperty = new SimpleStringProperty();
+		this.currentLocationNameProperty = new SimpleStringProperty();
 
 		this.actionsListProperty = new SimpleListProperty<Action>();
 		this.selectedActionProperty = new SimpleObjectProperty<Action>();
-		
+
 		this.itemsListProperty = new SimpleListProperty<Item>();
 		this.selectedItemProperty = new SimpleObjectProperty<Item>();
-		
+
 		this.itemsListProperty.setValue(FXCollections.observableList(this.gameManager.getPlayer().getInventory()));
 		this.update();
 	}
@@ -81,10 +88,10 @@ public class TextAdventureViewModel {
 		this.locationDescriptionProperty.setValue(this.gameManager.getLocationDescription());
 		this.actionsDescriptionProperty.setValue(this.gameManager.getAvailableActionsDescription());
 		this.playerStatusDescriptionProperty.setValue(this.gameManager.getPlayerStatus());
-		this.actionsListProperty
-				.setValue(FXCollections.observableList(this.gameManager.getActions()));
-		this.itemsListProperty.setValue(FXCollections.observableList(this.gameManager.getPlayer().getInventory()));
-		
+		this.actionsListProperty.setValue(FXCollections.observableList(this.gameManager.getActions()));
+		this.itemsStatusProperty.setValue(this.gameManager.getItemStatus());
+		this.coinsProperty.setValue(String.valueOf(this.gameManager.getPlayer().getCoins()));
+		this.currentLocationNameProperty.setValue(this.gameManager.getCurrLocation().getName());
 	}
 
 	/**
@@ -116,15 +123,21 @@ public class TextAdventureViewModel {
 		}
 		if (selectedAction instanceof ActionableItem) {
 			ActionableItem itemAction = (ActionableItem) selectedAction;
-			this.gameManager.usePlayerActionableItem(itemAction);
+			if (itemAction.getItem().getEffect() > 0) {
+				this.gameManager.usePlayerActionableItem(itemAction);
+			}
+			if (itemAction.getItem().getEffect() < 0) {
+				//TODO Make npcs and apply damage to them
+			}
 			this.removeOldUseActions();
-				
 		}
 		if (selectedAction instanceof NpcInteract) {
 	        NpcInteract npcAction = (NpcInteract) selectedAction;
 	        this.gameManager.interactWithNpc(npcAction);
 	    }
-		this.update(); 
+		
+		this.update();
+
 	}
 
 	/**
@@ -171,9 +184,19 @@ public class TextAdventureViewModel {
 	public ObjectProperty<Action> getSelectedActionProperty() {
 		return this.selectedActionProperty;
 	}
-	
+
+	/**
+	 * Gets the items status property
+	 * 
+	 * @return the item status
+	 */
+	public StringProperty getItemsStatusProperty() {
+		return this.itemsStatusProperty;
+	}
+
 	/**
 	 * Gets the game manager
+	 * 
 	 * @return the game manager
 	 */
 	public GameManager getGameManager() {
@@ -182,6 +205,7 @@ public class TextAdventureViewModel {
 
 	/**
 	 * Gets the items list property
+	 * 
 	 * @return the itemsListProperty
 	 */
 	public ListProperty<Item> getItemsListProperty() {
@@ -190,16 +214,33 @@ public class TextAdventureViewModel {
 
 	/**
 	 * Gets the selected item property
+	 * 
 	 * @return the selectedItemProperty
 	 */
 	public ObjectProperty<Item> getSelectedItemProperty() {
 		return this.selectedItemProperty;
 	}
+	/**
+	 * Gets the coins property
+	 * @return the coins property
+	 */
+	
+	public StringProperty getCoinsProperty() {
+		return this.coinsProperty;
+	}
 	
 	/**
-	 * Adds the selected items use actions to the available actions
-	 * and removes the older actions from the previous selection
-	 * @param item the item to add the actions for 
+	 * Gets the current location name property
+	 * @return the location name property
+	 */
+	public StringProperty getCurrentLocationNameProperty() {
+		return this.currentLocationNameProperty;
+	}
+	/**
+	 * Adds the selected items use actions to the available actions and removes the
+	 * older actions from the previous selection
+	 * 
+	 * @param item the item to add the actions for
 	 */
 	public void addItemUseActions(Item item) {
 		this.removeOldUseActions();
@@ -207,7 +248,7 @@ public class TextAdventureViewModel {
 		this.gameManager.getActions().add(new DropItem(item));
 		this.update();
 	}
-	
+
 	private void removeOldUseActions() {
 		List<Action> flaggedActions = new ArrayList<Action>();
 		for (Action action : this.gameManager.getActions()) {
@@ -219,6 +260,6 @@ public class TextAdventureViewModel {
 			this.gameManager.getActions().remove(action);
 		}
 		this.update();
-		
+
 	}
 }

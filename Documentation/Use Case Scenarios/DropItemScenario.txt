@@ -8,9 +8,13 @@ Context
 
 Primary Flow 
 
-	1. User selects an item to drop from their inventory. 
+	1. User selects an item from their inventory. 
 	
-	2. System removes the item from the player’s inventory. 
+	2. User selects to drop the item
+	
+	3. System removes the item from the player’s inventory. 
+	
+	4. System removes all use actions on the item dropped
 	
 	3. System adds the item to the current location. 
 	
