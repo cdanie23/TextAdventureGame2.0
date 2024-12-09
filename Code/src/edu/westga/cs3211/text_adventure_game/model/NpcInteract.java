@@ -3,7 +3,7 @@ package edu.westga.cs3211.text_adventure_game.model;
 /**
  * Represents an interaction with an NPC.
  * 
- * @author Jacob
+ * @author Jacob and Kate
  * @version Fall 2024
  */
 public class NpcInteract extends Action {
@@ -82,8 +82,7 @@ public class NpcInteract extends Action {
         	((Player) character).setCoins(((Player) character).getCoins() + this.npc.getRandomCoinDrop());
             return "You defeated the " + this.npc.getName() + "!";
         }
-        System.out.println(this.npc.getHealth());
-        return "You did not defeat the " + this.npc.getName() + "!";
+        return "You did not defeat the " + this.npc.getName() + "! " + "Health = " + this.npc.getHealth();
     }
 
     @Override

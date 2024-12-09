@@ -70,17 +70,27 @@ public class NpcInteractTest {
     }
 
     @Test
-    public void testFightNpc() {
+    public void testFightNpcKill() {
         Npc goblinNpc = new Npc("Goblin", 10, 50, 100);
         NpcInteract fightInteraction = new NpcInteract(goblinNpc, "Fight the goblin");
+        character.setDamage(100);
         String result = fightInteraction.takeAction(character);
         assertEquals("You defeated the Goblin!", result);
         assertEquals(0, goblinNpc.getHealth());
-
-        //TODO Implement Player Inventory
-//        // Verify the character received loot
-//        Item expectedLoot = new Item("Loot", 1, 0, goblinNpc.getRandomCoinDrop());
-//        assertTrue(character.getInventory().contains(expectedLoot));
+        int coins =  ((Player)character).getCoins();
+        assertEquals(true, coins > 0);
+    }
+    
+    @Test
+    public void testFightNpcNotKill() {
+        Npc goblinNpc = new Npc("Goblin", 10, 50, 100);
+        NpcInteract fightInteraction = new NpcInteract(goblinNpc, "Fight the goblin");
+        character.setDamage(10);
+        String result = fightInteraction.takeAction(character);
+        assertEquals("You did not defeat the Goblin! Health = 90", result);
+        assertEquals(90, goblinNpc.getHealth());
+        int coins =  ((Player)character).getCoins();
+        assertEquals(true, coins == 0);
     }
 
     @Test

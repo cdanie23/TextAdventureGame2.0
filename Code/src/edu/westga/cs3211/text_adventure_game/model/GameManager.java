@@ -242,36 +242,4 @@ public class GameManager {
 	public void equipeToolToUser(int damage) {
 		this.player.getDamage();
 	}
-	
-	/**
-	 * Damages the NPCs at the current Location
-	 * @param damage the damage applied
-	 */
-	public void applyDamageToNPCs(int damage) {
-		Stack<Npc> removedNpcs = new Stack<Npc>();
-		for (Npc curr : this.getCurrLocation().getNpcs()) {
-			curr.setHealth(curr.getHealth() + damage);
-			if (curr.getHealth() <= 0) {
-				 this.player.setCoins(this.player.getCoins() + curr.getRandomCoinDrop());
-				removedNpcs.push(curr);
-			}
-		}
-		this.currLocation.getNpcs().removeAll(removedNpcs);
-	}
-	
-	/**
-	 * Damages the NPCs at the current Location
-	 */
-	public void applyDamageToNPCs() {
-		Stack<Npc> removedNpcs = new Stack<Npc>();
-		for (Npc curr : this.getCurrLocation().getNpcs()) {
-			curr.setHealth(curr.getHealth() + this.getPlayer().getDamage());
-			if (curr.getHealth() <= 0) {
-				this.player.setCoins(this.player.getCoins() + curr.getRandomCoinDrop());
-				removedNpcs.push(curr);
-				this.itemStatus = "Enemy Defeated";
-			}
-		}
-		this.currLocation.getNpcs().removeAll(removedNpcs);
-	}
 }
