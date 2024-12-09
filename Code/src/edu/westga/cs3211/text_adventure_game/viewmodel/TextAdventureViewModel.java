@@ -36,6 +36,7 @@ public class TextAdventureViewModel {
 	private StringProperty itemsStatusProperty;
 	private StringProperty coinsProperty;
 	private StringProperty currentLocationNameProperty;
+	private StringProperty weightTextProperty;
 
 	private ListProperty<Action> actionsListProperty;
 	private ObjectProperty<Action> selectedActionProperty;
@@ -60,6 +61,7 @@ public class TextAdventureViewModel {
 		this.itemsStatusProperty = new SimpleStringProperty();
 		this.coinsProperty = new SimpleStringProperty();
 		this.currentLocationNameProperty = new SimpleStringProperty();
+		this.weightTextProperty = new SimpleStringProperty();
 
 		this.actionsListProperty = new SimpleListProperty<Action>();
 		this.selectedActionProperty = new SimpleObjectProperty<Action>();
@@ -92,6 +94,7 @@ public class TextAdventureViewModel {
 		this.itemsStatusProperty.setValue(this.gameManager.getItemStatus());
 		this.coinsProperty.setValue(String.valueOf(this.gameManager.getPlayer().getCoins()));
 		this.currentLocationNameProperty.setValue(this.gameManager.getCurrLocation().getName());
+		this.weightTextProperty.setValue(this.gameManager.getPlayer().getTotalWeight() + "/100");
 	}
 
 	/**
@@ -221,11 +224,11 @@ public class TextAdventureViewModel {
 	public ObjectProperty<Item> getSelectedItemProperty() {
 		return this.selectedItemProperty;
 	}
+	
 	/**
 	 * Gets the coins property
 	 * @return the coins property
 	 */
-	
 	public StringProperty getCoinsProperty() {
 		return this.coinsProperty;
 	}
@@ -237,6 +240,15 @@ public class TextAdventureViewModel {
 	public StringProperty getCurrentLocationNameProperty() {
 		return this.currentLocationNameProperty;
 	}
+	
+	/**
+	 * Gets the weight text property
+	 * @return the weight text property 
+	 */
+	public StringProperty getWeightTextProperty() {
+		return this.weightTextProperty;
+	}
+	
 	/**
 	 * Adds the selected items use actions to the available actions and removes the
 	 * older actions from the previous selection
