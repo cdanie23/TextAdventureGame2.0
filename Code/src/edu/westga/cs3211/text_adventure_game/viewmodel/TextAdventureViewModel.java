@@ -18,12 +18,11 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
-import javafx.util.converter.NumberStringConverter;
 
 /**
  * The view model for the text adventure game
  * 
- * @author Colby and Jacob
+ * @author Colby, Jacob and Kate
  * @version Fall 2024
  */
 public class TextAdventureViewModel {
@@ -36,6 +35,7 @@ public class TextAdventureViewModel {
 	private StringProperty itemsStatusProperty;
 	private StringProperty coinsProperty;
 	private StringProperty currentLocationNameProperty;
+	private StringProperty weightTextProperty;
 
 	private ListProperty<Action> actionsListProperty;
 	private ObjectProperty<Action> selectedActionProperty;
@@ -60,6 +60,7 @@ public class TextAdventureViewModel {
 		this.itemsStatusProperty = new SimpleStringProperty();
 		this.coinsProperty = new SimpleStringProperty();
 		this.currentLocationNameProperty = new SimpleStringProperty();
+		this.weightTextProperty = new SimpleStringProperty();
 
 		this.actionsListProperty = new SimpleListProperty<Action>();
 		this.selectedActionProperty = new SimpleObjectProperty<Action>();
@@ -92,6 +93,7 @@ public class TextAdventureViewModel {
 		this.itemsStatusProperty.setValue(this.gameManager.getItemStatus());
 		this.coinsProperty.setValue(String.valueOf(this.gameManager.getPlayer().getCoins()));
 		this.currentLocationNameProperty.setValue(this.gameManager.getCurrLocation().getName());
+		this.weightTextProperty.setValue(this.gameManager.getPlayer().getTotalWeight() + "/" + GameManager.MAX_WEIGHT);
 	}
 
 	/**
@@ -127,13 +129,14 @@ public class TextAdventureViewModel {
 				this.gameManager.usePlayerActionableItem(itemAction);
 			}
 			if (itemAction.getItem().getEffect() < 0) {
-				//TODO Make npcs and apply damage to them
+				this.gameManager.getPlayer().setDamage(itemAction.getItem().getEffect());
 			}
 			this.removeOldUseActions();
 		}
 		if (selectedAction instanceof NpcInteract) {
 	        NpcInteract npcAction = (NpcInteract) selectedAction;
 	        this.gameManager.interactWithNpc(npcAction);
+	        this.itemsListProperty.setValue(FXCollections.observableList(this.gameManager.getPlayer().getInventory()));
 	    }
 		
 		this.update();
@@ -220,11 +223,11 @@ public class TextAdventureViewModel {
 	public ObjectProperty<Item> getSelectedItemProperty() {
 		return this.selectedItemProperty;
 	}
+	
 	/**
 	 * Gets the coins property
 	 * @return the coins property
 	 */
-	
 	public StringProperty getCoinsProperty() {
 		return this.coinsProperty;
 	}
@@ -236,6 +239,15 @@ public class TextAdventureViewModel {
 	public StringProperty getCurrentLocationNameProperty() {
 		return this.currentLocationNameProperty;
 	}
+	
+	/**
+	 * Gets the weight text property
+	 * @return the weight text property 
+	 */
+	public StringProperty getWeightTextProperty() {
+		return this.weightTextProperty;
+	}
+	
 	/**
 	 * Adds the selected items use actions to the available actions and removes the
 	 * older actions from the previous selection

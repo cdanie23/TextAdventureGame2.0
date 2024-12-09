@@ -2,12 +2,18 @@ package edu.westga.cs3211.text_adventure_game.model.test.npc;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import edu.westga.cs3211.text_adventure_game.datatier.ItemReader;
 import edu.westga.cs3211.text_adventure_game.model.Action;
 import edu.westga.cs3211.text_adventure_game.model.Direction;
+import edu.westga.cs3211.text_adventure_game.model.Item;
 import edu.westga.cs3211.text_adventure_game.model.Location;
 import edu.westga.cs3211.text_adventure_game.model.LocationType;
 import edu.westga.cs3211.text_adventure_game.model.Npc;
@@ -18,14 +24,20 @@ public class NpcManagerTest {
     private NpcManager npcManager;
     private ArrayList<Npc> npcPool;
     private Location location;
-
+    private List<Item> itemPool;
+    private ItemReader itemReader;
     @BeforeEach
     public void setUp() {
         this.npcPool = new ArrayList<>();
         npcPool.add(new Npc("Goblin", 10, 50, 100));
         npcPool.add(new Npc("Merchant", 5, 30, 80));
         npcPool.add(new Npc("Chest", 0, 0, 0));
-
+        
+        File itemFile = new File("Items.txt");
+        this.itemReader = new ItemReader(itemFile);
+        this.itemPool = this.itemReader.readItems();
+       
+        
         String name = "Forest";
         String description = "A dense forest filled with mystery.";
         ArrayList<Action> actions = new ArrayList<>();
@@ -40,7 +52,7 @@ public class NpcManagerTest {
         
         location = new Location(name, description, actions, adjacentLocations, locationType);
         
-        npcManager = new NpcManager(npcPool);
+        npcManager = new NpcManager(npcPool, itemPool);
     }
 
     @Test
@@ -77,9 +89,9 @@ public class NpcManagerTest {
 
     @Test
     public void testNpcManagerInvalidNpcPool() {
-        assertThrows(IllegalArgumentException.class, () -> new NpcManager(null),
+        assertThrows(IllegalArgumentException.class, () -> new NpcManager(null, List.of()),
                 "NPC pool cannot be null or empty.");
-        assertThrows(IllegalArgumentException.class, () -> new NpcManager(new ArrayList<>()),
+        assertThrows(IllegalArgumentException.class, () -> new NpcManager(new ArrayList<>(), List.of()),
                 "NPC pool cannot be null or empty.");
     }
 
@@ -99,5 +111,16 @@ public class NpcManagerTest {
     @Test
     public void testLocationType() {
         assertEquals(LocationType.Safe, location.getLocationType(), "The location type should be 'Safe'.");
+    }
+    
+    @Test
+    void testAddRandomItemsToNpc() {
+    	this.npcManager.addRandomNpcs(2, location);
+    	
+    	Npc npcOne = location.getNpcs().get(0);
+    	Npc npcTwo = location.getNpcs().get(1);
+    	
+    	assertTrue(npcOne.getItems().size() > 0);
+    	assertTrue(npcTwo.getItems().size() > 0);
     }
 }

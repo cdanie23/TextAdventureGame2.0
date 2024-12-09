@@ -9,6 +9,7 @@ import java.util.List;
  */
 public class Player extends Damageable {
 	private int coins;
+	
 	/**
 	 * Creates an instance of a player
 	 * @param startingItems the starting items of the player
@@ -18,7 +19,7 @@ public class Player extends Damageable {
 	public Player(List<Item> startingItems) {
 		super(100, startingItems);
 		this.coins = 0;
-	
+		this.setDamage(10);
 	}
 	/**
 	 * Gets if the player is encumbered
