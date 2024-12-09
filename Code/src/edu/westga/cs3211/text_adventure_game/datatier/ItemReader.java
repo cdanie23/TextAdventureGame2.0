@@ -52,7 +52,7 @@ public class ItemReader {
 			}
 		} catch (Exception exception) {
 			
-			exception.printStackTrace();
+			System.err.print(exception.getMessage());
 		}
 		return items;
 	}
