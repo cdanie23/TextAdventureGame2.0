@@ -129,7 +129,7 @@ public class TextAdventureViewModel {
 				this.gameManager.usePlayerActionableItem(itemAction);
 			}
 			if (itemAction.getItem().getEffect() < 0) {
-				this.gameManager.applyDamageToNPCs(itemAction.getItem().getEffect());
+				this.gameManager.getPlayer().setDamage(itemAction.getItem().getEffect());
 			}
 			this.removeOldUseActions();
 		}

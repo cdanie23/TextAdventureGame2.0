@@ -15,9 +15,9 @@ import edu.westga.cs3211.text_adventure_game.datatier.NpcReader;
  * @version Fall 2024
  */
 public class GameManager {
+	public static final int MAX_WEIGHT = 100;
 	private static final String YOU_ARE_DEAD_MSG = "You are dead";
 	private static final String LOCATIONS_TXT_FILE = "Locations.txt";
-	public static final int MAX_WEIGHT = 100;
 	private Player player;
 	private List<Location> allLocations;
 	private List<Item> allItems;
@@ -33,13 +33,11 @@ public class GameManager {
 
 	private String itemStatus;
 
-	
-	/**
-	 * Creates an instance of the game manager class
+	/** Creates an instance of the game manager class
+	 * 
 	 * @postcondition player != null && locationReader != null && allLocations != null && currentLocation != null
 	 */
 	public GameManager() {
-		
 		File locationFile = new File(LOCATIONS_TXT_FILE);
 		this.locationReader = new LocationReader(locationFile);
 		this.allLocations = this.locationReader.readLocations();
@@ -223,9 +221,10 @@ public class GameManager {
 	 * calls the player to interact with npc
 	 * 
 	 * @param npcAction the npc being interacted with
+	 * 
 	 */
 	public void interactWithNpc(NpcInteract npcAction) {
-		npcAction.takeAction(this.player);
+		this.itemStatus = npcAction.takeAction(this.player);
 	}
 	/**
 	 * Gets the status of players items
@@ -237,7 +236,15 @@ public class GameManager {
 	}
 
 	/**
-	 * Damages the NPC at the current Location
+	 * Equipe Tool To User
+	 * @param damage the damage the user can do.
+	 */
+	public void equipeToolToUser(int damage) {
+		this.player.getDamage();
+	}
+	
+	/**
+	 * Damages the NPCs at the current Location
 	 * @param damage the damage applied
 	 */
 	public void applyDamageToNPCs(int damage) {
@@ -245,8 +252,24 @@ public class GameManager {
 		for (Npc curr : this.getCurrLocation().getNpcs()) {
 			curr.setHealth(curr.getHealth() + damage);
 			if (curr.getHealth() <= 0) {
-				 //TODO add loot to player
+				 this.player.setCoins(this.player.getCoins() + curr.getRandomCoinDrop());
 				removedNpcs.push(curr);
+			}
+		}
+		this.currLocation.getNpcs().removeAll(removedNpcs);
+	}
+	
+	/**
+	 * Damages the NPCs at the current Location
+	 */
+	public void applyDamageToNPCs() {
+		Stack<Npc> removedNpcs = new Stack<Npc>();
+		for (Npc curr : this.getCurrLocation().getNpcs()) {
+			curr.setHealth(curr.getHealth() + this.getPlayer().getDamage());
+			if (curr.getHealth() <= 0) {
+				this.player.setCoins(this.player.getCoins() + curr.getRandomCoinDrop());
+				removedNpcs.push(curr);
+				this.itemStatus = "Enemy Defeated";
 			}
 		}
 		this.currLocation.getNpcs().removeAll(removedNpcs);

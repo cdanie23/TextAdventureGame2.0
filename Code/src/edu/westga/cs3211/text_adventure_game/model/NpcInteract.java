@@ -77,9 +77,13 @@ public class NpcInteract extends Action {
         if (this.npc.getIsDead()) {
             return "The NPC is already dead.";
         }
-        this.npc.setHealth(0);
-        character.getInventory().add(new Item("Loot", 1, 0, this.npc.getRandomCoinDrop()));
-        return "You defeated the " + this.npc.getName() + "!";
+        this.npc.setHealth(this.npc.getHealth() - character.getDamage());
+        if (this.npc.getHealth() <= 0) {
+        	((Player) character).setCoins(((Player) character).getCoins() + this.npc.getRandomCoinDrop());
+            return "You defeated the " + this.npc.getName() + "!";
+        }
+        System.out.println(this.npc.getHealth());
+        return "You did not defeat the " + this.npc.getName() + "!";
     }
 
     @Override
