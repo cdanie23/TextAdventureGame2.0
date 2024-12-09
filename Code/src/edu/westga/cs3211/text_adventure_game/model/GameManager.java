@@ -3,6 +3,7 @@ package edu.westga.cs3211.text_adventure_game.model;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 import edu.westga.cs3211.text_adventure_game.datatier.ItemReader;
 import edu.westga.cs3211.text_adventure_game.datatier.LocationReader;
@@ -233,5 +234,21 @@ public class GameManager {
 	
 	public String getItemStatus() {
 		return this.itemStatus;
+	}
+
+	/**
+	 * Damages the NPC at the current Location
+	 * @param damage the damage applied
+	 */
+	public void applyDamageToNPCs(int damage) {
+		Stack<Npc> removedNpcs = new Stack<Npc>();
+		for (Npc curr : this.getCurrLocation().getNpcs()) {
+			curr.setHealth(curr.getHealth() + damage);
+			if (curr.getHealth() <= 0) {
+				 //TODO add loot to player
+				removedNpcs.push(curr);
+			}
+		}
+		this.currLocation.getNpcs().removeAll(removedNpcs);
 	}
 }

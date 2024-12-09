@@ -18,12 +18,11 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
-import javafx.util.converter.NumberStringConverter;
 
 /**
  * The view model for the text adventure game
  * 
- * @author Colby and Jacob
+ * @author Colby, Jacob and Kate
  * @version Fall 2024
  */
 public class TextAdventureViewModel {
@@ -94,7 +93,7 @@ public class TextAdventureViewModel {
 		this.itemsStatusProperty.setValue(this.gameManager.getItemStatus());
 		this.coinsProperty.setValue(String.valueOf(this.gameManager.getPlayer().getCoins()));
 		this.currentLocationNameProperty.setValue(this.gameManager.getCurrLocation().getName());
-		this.weightTextProperty.setValue(this.gameManager.getPlayer().getTotalWeight() + "/100");
+		this.weightTextProperty.setValue(this.gameManager.getPlayer().getTotalWeight() + "/" + GameManager.MAX_WEIGHT);
 	}
 
 	/**
@@ -130,7 +129,7 @@ public class TextAdventureViewModel {
 				this.gameManager.usePlayerActionableItem(itemAction);
 			}
 			if (itemAction.getItem().getEffect() < 0) {
-				//TODO Make npcs and apply damage to them
+				this.gameManager.applyDamageToNPCs(itemAction.getItem().getEffect());
 			}
 			this.removeOldUseActions();
 		}

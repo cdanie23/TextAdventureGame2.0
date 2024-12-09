@@ -9,15 +9,21 @@ import edu.westga.cs3211.text_adventure_game.viewmodel.TextAdventureViewModel;
 class TestConstructor {
 
 	@Test
-	void testValidConstructor() {
-		TextAdventureViewModel viewModel = new TextAdventureViewModel();
-		
-		assertTrue(viewModel.getGameManager() != null);
-		assertTrue(viewModel.getActionsDescriptionProperty() != null);
-		assertTrue(viewModel.getActionsListProperty() != null);
-		assertTrue(viewModel.getLocationDescriptionProperty() != null);
-		assertTrue(viewModel.getPlayerStatusDescriptionProperty() != null);
-		assertTrue(viewModel.getSelectedActionProperty() != null);
-	}
+	void testConstructorInitializesFields() {
+	    TextAdventureViewModel viewModel = new TextAdventureViewModel();
 
+	    assertNotNull(viewModel.getLocationDescriptionProperty());
+	    assertNotNull(viewModel.getActionsDescriptionProperty());
+	    assertNotNull(viewModel.getPlayerStatusDescriptionProperty());
+	    assertNotNull(viewModel.getItemsStatusProperty());
+	    assertNotNull(viewModel.getCoinsProperty());
+	    assertNotNull(viewModel.getCurrentLocationNameProperty());
+	    assertNotNull(viewModel.getWeightTextProperty());
+	    assertNotNull(viewModel.getActionsListProperty());
+	    assertNotNull(viewModel.getSelectedActionProperty());
+	    assertNotNull(viewModel.getItemsListProperty());
+	    assertNotNull(viewModel.getSelectedItemProperty());
+	    assertNotNull(viewModel.getGameManager());
+	}
+	
 }
