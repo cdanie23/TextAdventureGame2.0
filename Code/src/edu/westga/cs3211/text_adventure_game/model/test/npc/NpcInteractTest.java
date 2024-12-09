@@ -37,17 +37,16 @@ public class NpcInteractTest {
     @Test
     public void testLootChest() {
         Npc chestNpc = new Npc("Chest", 10, 50, 100);
-        chestNpc.addItem(new Item("Sword", 5, 5, 5));  // Add an item to the chest
+        Item sword = new Item("Sword", 5, 5, 5);
+        chestNpc.addItem(sword);  
         NpcInteract chestInteraction = new NpcInteract(chestNpc, "Loot the chest");
         String result = chestInteraction.takeAction(character);
         assertEquals("You looted the chest!", result);
+       
+      
+       assertTrue(character.getInventory().contains(sword));
 
-      //TODO Implement Player Inventory
-//        // Verify that the character's inventory now contains the sword
-//        assertTrue(character.getInventory().contains(new Item("Sword", 5, 5, 5)));
-//
-//        // Verify that the chest is considered looted (npc's health should be 0)
-//        assertEquals(0, chestNpc.getHealth());
+       assertEquals(0, chestNpc.getHealth());
     }
 
     @Test

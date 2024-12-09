@@ -51,7 +51,7 @@ public class NpcInteract extends Action {
         if (this.npc.getIsDead()) {
             return "The chest has already been looted.";
         }
-        character.getInventory().addAll(this.npc.getInventory());
+        character.getInventory().addAll(this.npc.getItems());
         this.npc.setHealth(0);
         return "You looted the chest!";
     }

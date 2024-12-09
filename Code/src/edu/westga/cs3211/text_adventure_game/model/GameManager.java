@@ -50,17 +50,21 @@ public class GameManager {
 		File npcFile = new File("Npc.txt");
 		this.npcReader = new NpcReader(npcFile);
 		this.allNpcs = this.npcReader.readNpcs();
-		this.npcManager = new NpcManager(this.allNpcs);
+		this.npcManager = new NpcManager(this.allNpcs, this.allItems);
 		
 		this.setupPlayer();
 		this.currLocation = this.allLocations.get(0);
-		this.npcManager.addNpcByIndex(0, 5, this.currLocation);
+		this.npcManager.addRandomNpcs(2, this.currLocation);
 		this.playerHasWon = false;
 		
 		this.setupActions();
 	}
 	
-	private void setupActions() {
+	/**
+	 * Sets up all the actions from the location
+	 * @postcondition: this.allActions == this.currLocation.getActions()
+	 */
+	public void setupActions() {
 		this.allActions = this.currLocation.getActions();
 	}
 	

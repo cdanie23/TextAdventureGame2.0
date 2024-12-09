@@ -134,6 +134,7 @@ public class TextAdventureViewModel {
 		if (selectedAction instanceof NpcInteract) {
 	        NpcInteract npcAction = (NpcInteract) selectedAction;
 	        this.gameManager.interactWithNpc(npcAction);
+	        this.itemsListProperty.setValue(FXCollections.observableList(this.gameManager.getPlayer().getInventory()));
 	    }
 		
 		this.update();

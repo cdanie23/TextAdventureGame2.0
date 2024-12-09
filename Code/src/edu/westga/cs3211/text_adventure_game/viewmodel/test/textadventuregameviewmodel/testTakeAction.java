@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import edu.westga.cs3211.text_adventure_game.model.Action;
@@ -15,7 +16,10 @@ import edu.westga.cs3211.text_adventure_game.model.UseItem;
 import edu.westga.cs3211.text_adventure_game.viewmodel.TextAdventureViewModel;
 
 class testTakeAction {
-
+	@BeforeEach
+	void setupViewModel() {
+		
+	}
 	@Test
 	void testValidMoveAction() {
 		TextAdventureViewModel viewModel = new TextAdventureViewModel();
@@ -86,5 +90,11 @@ class testTakeAction {
 		
 		assertEquals(items.size(), 0);
 		
+	}
+	@Test
+	void testInteractWithChest() {
+		TextAdventureViewModel viewModel = new TextAdventureViewModel();
+		
+
 	}
 }
