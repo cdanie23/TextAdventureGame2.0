@@ -87,7 +87,7 @@ public class NpcInteractTest {
         NpcInteract fightInteraction = new NpcInteract(goblinNpc, "Fight the goblin");
         character.setDamage(10);
         String result = fightInteraction.takeAction(character);
-        assertEquals("You did not defeat the Goblin! Health = 90", result);
+        assertEquals("You did not defeat the Goblin! Health: 90", result);
         assertEquals(90, goblinNpc.getHealth());
         int coins =  ((Player)character).getCoins();
         assertEquals(true, coins == 0);

@@ -82,7 +82,8 @@ public class NpcInteract extends Action {
         	((Player) character).setCoins(((Player) character).getCoins() + this.npc.getRandomCoinDrop());
             return "You defeated the " + this.npc.getName() + "!";
         }
-        return "You did not defeat the " + this.npc.getName() + "! " + "Health = " + this.npc.getHealth();
+        character.setHealth(character.getHealth() - this.npc.getDamage());
+        return "You did not defeat the " + this.npc.getName() + "! " + "Health: " + this.npc.getHealth();
     }
 
     @Override
