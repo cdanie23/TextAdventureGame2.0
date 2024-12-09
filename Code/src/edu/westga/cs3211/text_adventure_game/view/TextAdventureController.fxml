@@ -8,28 +8,55 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minHeight="279.0" minWidth="588.0" prefHeight="400.0" prefWidth="588.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.westga.cs3211.text_adventure_game.view.MainWindow">
-   <children>
-      <Label fx:id="worldNameLabel" layoutX="226.0" layoutY="11.0" text="World Name">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Label>
-      <Label layoutX="35.0" layoutY="71.0" text="Current Lcoation Name: " />
-      <Label fx:id="currentLocationNameLabel" layoutX="175.0" layoutY="70.0" prefHeight="18.0" prefWidth="135.0" text="NAME" />
-      <Label fx:id="locationDescriptionLabel" layoutX="35.0" layoutY="98.0" text="Current Location Description" />
-      <TextArea fx:id="locationDescriptionTextArea" editable="false" layoutX="35.0" layoutY="115.0" prefHeight="109.0" prefWidth="279.0" wrapText="true" />
-      <Label layoutX="35.0" layoutY="240.0" text=" Available Actions Description" />
-      <TextArea fx:id="actionsDescriptionTextArea" editable="false" layoutX="35.0" layoutY="257.0" prefHeight="83.0" prefWidth="279.0" wrapText="true" />
-      <Label layoutX="350.0" layoutY="98.0" text="Player Status" />
-      <Label layoutX="488.0" layoutY="98.0" text="Health: " />
-      <Label fx:id="healthLabel" layoutX="529.0" layoutY="98.0" text="100" />
-      <Label layoutX="351.0" layoutY="120.0" text="Inventory" />
-      <Label layoutX="477.0" layoutY="120.0" text="Weight:" />
-      <Label fx:id="weightTxtLabel" layoutX="521.0" layoutY="120.0" text="0 / 100" />
-      <ListView fx:id="inventoryListView" layoutX="351.0" layoutY="140.0" prefHeight="200.0" prefWidth="200.0" />
-      <Label layoutX="36.0" layoutY="340.0" text="Actions" />
-      <ComboBox fx:id="actionsComboBox" layoutX="36.0" layoutY="358.0" prefHeight="26.0" prefWidth="185.0" />
-      <Button fx:id="takeActionButton" layoutX="234.0" layoutY="358.0" mnemonicParsing="false" onAction="#takeActionButtonClick" text="Take Action" />
-   </children>
+<AnchorPane minHeight="279.0" minWidth="588.0" prefHeight="400.0" prefWidth="588.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.westga.cs3211.text_adventure_game.view.MainWindow">
+
+	<children>
+
+		<Label fx:id="worldNameLabel" layoutX="226.0" layoutY="11.0" text="World Name">
+
+			<font>
+
+				<Font size="24.0" />
+
+			</font>
+
+		</Label>
+
+		<Label layoutX="35.0" layoutY="71.0" text="Current Lcoation Name: " />
+
+		<Label fx:id="currentLocationNameLabel" layoutX="175.0" layoutY="70.0" prefHeight="18.0" prefWidth="135.0" text="NAME" />
+
+		<Label fx:id="locationDescriptionLabel" layoutX="35.0" layoutY="98.0" text="Current Location Description" />
+
+		<TextArea fx:id="locationDescriptionTextArea" editable="false" layoutX="35.0" layoutY="115.0" prefHeight="109.0" prefWidth="279.0" wrapText="true" />
+
+		<Label layoutX="35.0" layoutY="240.0" text=" Available Actions Description" />
+
+		<TextArea fx:id="actionsDescriptionTextArea" editable="false" layoutX="35.0" layoutY="257.0" prefHeight="83.0" prefWidth="279.0" wrapText="true" />
+
+		<Label layoutX="401.0" layoutY="63.0" text="Player Status" />
+
+		<Label layoutX="477.0" layoutY="98.0" text="Health: " />
+
+		<Label fx:id="healthLabel" layoutX="529.0" layoutY="98.0" text="100" />
+
+		<Label layoutX="351.0" layoutY="120.0" text="Inventory" />
+
+		<Label layoutX="477.0" layoutY="120.0" text="Weight:" />
+
+		<Label fx:id="weightTxtLabel" layoutX="521.0" layoutY="120.0" text="0 / 100" />
+
+		<ListView fx:id="inventoryListView" layoutX="351.0" layoutY="140.0" prefHeight="200.0" prefWidth="200.0" />
+
+		<Label layoutX="36.0" layoutY="340.0" text="Actions" />
+
+		<ComboBox fx:id="actionsComboBox" layoutX="36.0" layoutY="358.0" prefHeight="26.0" prefWidth="185.0" />
+
+		<Button fx:id="takeActionButton" layoutX="234.0" layoutY="358.0" mnemonicParsing="false" onAction="#takeActionButtonClick" text="Take Action" />
+		<Label fx:id="itemStatusLabel" layoutX="351.0" layoutY="358.0" prefHeight="25.0" prefWidth="200.0" textAlignment="CENTER" />
+
+		<Label layoutX="351.0" layoutY="98.0" text="Coins:" />
+		<Label fx:id="coinsLabel" layoutX="395.0" layoutY="98.0" />
+	</children>
+
 </AnchorPane>
