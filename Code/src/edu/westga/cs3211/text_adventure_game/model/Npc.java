@@ -27,6 +27,7 @@ public class Npc extends Damageable {
      */
     public Npc(String name, int coinDropMin, int coinDropMax, int health) {
         super(health, List.of());
+        this.setDamage((int) (health * .1));
         this.name = name;
         this.coinDropMin = coinDropMin;
         this.coinDropMax = coinDropMax;

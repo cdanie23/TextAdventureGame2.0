@@ -139,4 +139,5 @@ public class Location {
     public LocationType getLocationType() {
         return this.locationType;
     }
+   
 }

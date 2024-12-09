@@ -3,6 +3,7 @@ package edu.westga.cs3211.text_adventure_game.model;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 import edu.westga.cs3211.text_adventure_game.datatier.ItemReader;
 import edu.westga.cs3211.text_adventure_game.datatier.LocationReader;
@@ -14,9 +15,9 @@ import edu.westga.cs3211.text_adventure_game.datatier.NpcReader;
  * @version Fall 2024
  */
 public class GameManager {
+	public static final int MAX_WEIGHT = 100;
 	private static final String YOU_ARE_DEAD_MSG = "You are dead";
 	private static final String LOCATIONS_TXT_FILE = "Locations.txt";
-	public static final int MAX_WEIGHT = 100;
 	private Player player;
 	private List<Location> allLocations;
 	private List<Item> allItems;
@@ -32,13 +33,11 @@ public class GameManager {
 
 	private String itemStatus;
 
-	
-	/**
-	 * Creates an instance of the game manager class
+	/** Creates an instance of the game manager class
+	 * 
 	 * @postcondition player != null && locationReader != null && allLocations != null && currentLocation != null
 	 */
 	public GameManager() {
-		
 		File locationFile = new File(LOCATIONS_TXT_FILE);
 		this.locationReader = new LocationReader(locationFile);
 		this.allLocations = this.locationReader.readLocations();
@@ -50,17 +49,21 @@ public class GameManager {
 		File npcFile = new File("Npc.txt");
 		this.npcReader = new NpcReader(npcFile);
 		this.allNpcs = this.npcReader.readNpcs();
-		this.npcManager = new NpcManager(this.allNpcs);
+		this.npcManager = new NpcManager(this.allNpcs, this.allItems);
 		
 		this.setupPlayer();
 		this.currLocation = this.allLocations.get(0);
-		this.npcManager.addNpcByIndex(0, 5, this.currLocation);
+		this.npcManager.addRandomNpcs(2, this.currLocation);
 		this.playerHasWon = false;
 		
 		this.setupActions();
 	}
 	
-	private void setupActions() {
+	/**
+	 * Sets up all the actions from the location
+	 * @postcondition: this.allActions == this.currLocation.getActions()
+	 */
+	public void setupActions() {
 		this.allActions = this.currLocation.getActions();
 	}
 	
@@ -218,9 +221,10 @@ public class GameManager {
 	 * calls the player to interact with npc
 	 * 
 	 * @param npcAction the npc being interacted with
+	 * 
 	 */
 	public void interactWithNpc(NpcInteract npcAction) {
-		npcAction.takeAction(this.player);
+		this.itemStatus = npcAction.takeAction(this.player);
 	}
 	/**
 	 * Gets the status of players items
@@ -229,5 +233,13 @@ public class GameManager {
 	
 	public String getItemStatus() {
 		return this.itemStatus;
+	}
+
+	/**
+	 * Equipe Tool To User
+	 * @param damage the damage the user can do.
+	 */
+	public void equipeToolToUser(int damage) {
+		this.player.getDamage();
 	}
 }
