@@ -53,7 +53,7 @@ public class NpcReader {
                 npcs.add(npc);
             }
         } catch (Exception exception) {
-            exception.printStackTrace();
+            System.err.print(exception.getMessage());
         }
 
         return npcs;

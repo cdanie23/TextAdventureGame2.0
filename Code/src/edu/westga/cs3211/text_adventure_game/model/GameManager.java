@@ -221,7 +221,7 @@ public class GameManager {
 	 */
 	public void interactWithNpc(NpcInteract npcAction) {
 		npcAction.takeAction(this.player);
-
+	}
 	/**
 	 * Gets the status of players items
 	 * @return the item status
