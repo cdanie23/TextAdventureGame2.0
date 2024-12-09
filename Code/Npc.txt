@@ -1,0 +1,6 @@
+Chest,0,15,999
+Knight,5,15,50
+Dark Knight,15,30,100
+Vampire,20,50,150
+Dragon,50,75,200
+Merchant,0,0,999

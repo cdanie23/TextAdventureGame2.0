@@ -9,6 +9,7 @@ import java.util.List;
  */
 public abstract class Damageable { 
 	private int health;
+	private int damage;
 	private Boolean isDead;
 	private List<Item> inventory;
 	
@@ -83,5 +84,21 @@ public abstract class Damageable {
 			totalWeight += item.getWeight();
 		}
 		return totalWeight;
+	}
+	
+	/**
+	 * Gets the damage
+	 * @return the damage
+	 */
+	public int getDamage() {
+		return this.damage;
+	}
+	
+	/**
+	 * Sets the Damage
+	 * @param damage the damage
+	 */
+	public void setDamage(int damage) {
+		this.damage = damage;
 	}
 }

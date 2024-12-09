@@ -107,6 +107,7 @@ public class MainWindow {
 		this.itemStatusLabel.textProperty().bind(this.viewModel.getItemsStatusProperty());
 		this.coinsLabel.textProperty().bind(this.viewModel.getCoinsProperty());
 		this.currentLocationNameLabel.textProperty().bind(this.viewModel.getCurrentLocationNameProperty());
+		this.weightTxtLabel.textProperty().bind(this.viewModel.getWeightTextProperty());
 	}
 	
 	private void setupListeners() {
