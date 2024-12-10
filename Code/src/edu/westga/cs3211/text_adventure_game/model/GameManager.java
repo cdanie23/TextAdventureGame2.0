@@ -241,7 +241,7 @@ public class GameManager {
 	 * Equipe Tool To User
 	 * @param damage the damage the user can do.
 	 */
-	public void equipeToolToUser(int damage) {
-		this.player.getDamage();
+	public void equipToolToUser(int damage) {
+		this.player.setDamage(damage);
 	}
 }

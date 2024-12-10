@@ -102,4 +102,10 @@ public class NpcInteractTest {
         String result = fightInteraction.takeAction(character);
         assertEquals("The NPC is already dead.", result);
     }
+    
+    @Test
+    public void testFightNpcWithWeapon() {
+    	Npc goblinNpc = new Npc("Goblin", 10, 50, 100);
+        NpcInteract fightInteraction = new NpcInteract(goblinNpc, "Fight the goblin");
+    }
 }
