@@ -100,4 +100,12 @@ public class NpcInteract extends Action {
     public String toString() {
         return super.getDescription();
     }
+    /**
+     * Gets the npc of the action
+     * @return the npc
+     */
+    
+    public Npc getNpc() {
+    	return this.npc;
+    }
 }

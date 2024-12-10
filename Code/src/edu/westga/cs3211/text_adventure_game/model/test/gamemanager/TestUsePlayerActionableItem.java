@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 import edu.westga.cs3211.text_adventure_game.model.GameManager;
+import edu.westga.cs3211.text_adventure_game.model.Item;
+import edu.westga.cs3211.text_adventure_game.model.PickUpItem;
 import edu.westga.cs3211.text_adventure_game.model.UseItem;
 
 class TestUsePlayerActionableItem {
@@ -31,5 +33,20 @@ class TestUsePlayerActionableItem {
 	assertThrows(IllegalArgumentException.class, () -> {
 		gameManager.usePlayerActionableItem(useItem);
 	});
+	}
+	
+	@Test
+	void testPickUpAction() {
+		GameManager gameManager = new GameManager();
+		gameManager.getPlayer().getInventory().clear();
+		
+		Item item = new Item("Healing Potion", 10, 50, 10);
+		PickUpItem pickUpPotion = new PickUpItem(item);
+		
+		gameManager.usePlayerActionableItem(pickUpPotion);
+		
+		assertEquals(gameManager.getPlayer().getInventory().size(), 1);
+		
+		assertEquals(gameManager.getItemStatus(), "You have picked up Healing Potion");
 	}
 }

@@ -1,12 +1,11 @@
 package edu.westga.cs3211.text_adventure_game.model.test.location;
 
-import static org.junit.Assert.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import edu.westga.cs3211.text_adventure_game.model.Action;
 import edu.westga.cs3211.text_adventure_game.model.Direction;
@@ -14,8 +13,8 @@ import edu.westga.cs3211.text_adventure_game.model.Location;
 import edu.westga.cs3211.text_adventure_game.model.LocationType;
 import edu.westga.cs3211.text_adventure_game.model.Move;
 
-public class TestAddAction {
-	
+class TestAddAction {
+
 	@Test
     public void testAddActionValid() {
         String name = "Creaky Castle Gate";
@@ -44,8 +43,9 @@ public class TestAddAction {
         Location location = new Location(name, description, actions, adjacentLocations, locationType);
 
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            location.addAction(null); // Attempt to add a null action
+            location.addAction(null); 
         });
         assertEquals("Action cannot be null", exception.getMessage());
     }
+
 }

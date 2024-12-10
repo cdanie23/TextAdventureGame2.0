@@ -37,13 +37,13 @@ class TestInteractWithNpc {
 		@Override
 		 public void addRandomNpcs(int amount, Location location) {
 	        Npc chest1 = new Npc("Chest", 0, 50, 999);
-	        Npc chest2 = new Npc("Chest", 0, 50, 999);
+	        Npc enemy = new Npc("Dragon", 0, 50, 200);
 	        this.addRandomItemsToNpc(chest1, 2);
-	        this.addRandomItemsToNpc(chest2, 2);
+	       
 	        location.addNpc(chest1);
-	        location.addNpc(chest2);
+	        location.addNpc(enemy);
 	        Action npcInteraction1 = new NpcInteract(chest1, "Interact with " + chest1.getName());
-	        Action npcInteraction2 = new NpcInteract(chest2, "Interact with " + chest1.getName());
+	        Action npcInteraction2 = new NpcInteract(enemy, "Interact with " + chest1.getName());
 	        location.addAction(npcInteraction1);
 	        location.addAction(npcInteraction2);
 		}
@@ -82,14 +82,28 @@ class TestInteractWithNpc {
 		this.npcManager.addRandomNpcs(2, this.gameManager.getCurrLocation());
 		this.gameManager.setupActions();
 		
-		this.gameManager.interactWithNpc((NpcInteract)this.gameManager.getActions().get(1));
+		this.gameManager.interactWithNpc((NpcInteract)this.gameManager.getActions().get(0));
 		
 		
-		assertEquals(this.gameManager.getActions().size(), 2);
-		assertEquals(this.gameManager.getPlayer().getInventory().size(), 3);
+		assertEquals(this.gameManager.getActions().size(), 4);
+		
 	}
 	@Test
 	void testWhenNpcIsEnemy() {
-		//TODO setup enemy combat
+		this.gameManager.getCurrLocation().getNpcs().clear(); 
+		this.gameManager.getActions().clear();
+		this.npcManager.addRandomNpcs(2, this.gameManager.getCurrLocation());
+		this.gameManager.setupActions();
+		
+		this.gameManager.getPlayer().setDamage(20);
+		NpcInteract fightDragon = (NpcInteract)this.gameManager.getActions().get(1);
+		this.gameManager.interactWithNpc(fightDragon);
+		
+		
+		int playerHealth = this.gameManager.getPlayer().getHealth();
+		int npcHealth = fightDragon.getNpc().getHealth();
+		assertEquals(playerHealth, 80);
+		assertEquals(npcHealth, 180);
+		
 	}
 }
