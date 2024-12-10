@@ -125,9 +125,7 @@ public class TextAdventureViewModel {
 		}
 		if (selectedAction instanceof ActionableItem) {
 			ActionableItem itemAction = (ActionableItem) selectedAction;
-			if (itemAction.getItem().getEffect() > 0) {
-				this.gameManager.usePlayerActionableItem(itemAction);
-			}
+			this.gameManager.usePlayerActionableItem(itemAction);
 			if (itemAction.getItem().getEffect() < 0) {
 				int damage = Math.abs(itemAction.getItem().getEffect());
 				this.gameManager.getPlayer().setDamage(damage);
@@ -137,9 +135,9 @@ public class TextAdventureViewModel {
 		if (selectedAction instanceof NpcInteract) {
 	        NpcInteract npcAction = (NpcInteract) selectedAction;
 	        this.gameManager.interactWithNpc(npcAction);
-	        this.itemsListProperty.setValue(FXCollections.observableList(this.gameManager.getPlayer().getInventory()));
+	        
 	    }
-		
+		this.itemsListProperty.setValue(FXCollections.observableList(this.gameManager.getPlayer().getInventory()));
 		this.update();
 
 	}

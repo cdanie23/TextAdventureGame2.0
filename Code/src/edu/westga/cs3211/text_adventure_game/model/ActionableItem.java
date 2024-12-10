@@ -23,9 +23,10 @@ public abstract class ActionableItem extends Action {
 	/**
 	 * Takes the action
 	 * @param character the character
+	 * @param currLocation the current location of the action
 	 * @return true or false based on if the action was completed
 	 */
-	public abstract Boolean takeAction(Damageable character);
+	public abstract Boolean takeAction(Damageable character, Location currLocation);
 
 	@Override
 	public String toString() {
@@ -39,4 +40,5 @@ public abstract class ActionableItem extends Action {
 	public Item getItem() {
 		return this.item;
 	}
+	
 }

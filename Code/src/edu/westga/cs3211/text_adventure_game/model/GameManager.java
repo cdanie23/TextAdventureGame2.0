@@ -141,8 +141,10 @@ public class GameManager {
 		if (action instanceof UseItem) {
 			this.itemStatus = "You have used " + action.getItem().getName();
 		}
-		this.player.getInventory().remove(action.getItem());
-		return action.takeAction(this.player);
+		if (action instanceof PickUpItem) {
+			this.itemStatus = "You have picked up " + action.getItem().getName();
+		}
+		return action.takeAction(this.player, this.currLocation);
 	}
 
 	private void checkForTrapLocation() {
@@ -225,7 +227,7 @@ public class GameManager {
 	 */
 	public void interactWithNpc(NpcInteract npcAction) {
 
-		this.itemStatus = npcAction.takeAction(this.player);
+		this.itemStatus = npcAction.takeAction(this.player, this.currLocation);
 
 	}
 	/**

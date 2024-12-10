@@ -57,20 +57,20 @@ public class NpcManagerTest {
 
     @Test
     public void testAddNpcByIndex() {
-        npcManager.addNpcByIndex(0, 2, location);
+        npcManager.addNpcByIndex(0, 2, location, 2);
         assertEquals(2, location.getNpcs().size(), "NPCs should be added to the location.");
         assertEquals(2, location.getActions().size(), "Actions should be added to the location.");
     }
 
     @Test
     public void testAddNpcByIndexInvalidIndex() {
-        assertThrows(IllegalArgumentException.class, () -> npcManager.addNpcByIndex(10, 1, location),
+        assertThrows(IllegalArgumentException.class, () -> npcManager.addNpcByIndex(10, 1, location, 2),
                 "Invalid index should throw IllegalArgumentException.");
     }
 
     @Test
     public void testAddNpcByIndexInvalidAmount() {
-        assertThrows(IllegalArgumentException.class, () -> npcManager.addNpcByIndex(0, -1, location),
+        assertThrows(IllegalArgumentException.class, () -> npcManager.addNpcByIndex(0, -1, location, 2),
                 "Amount must be greater than 0.");
     }
 
