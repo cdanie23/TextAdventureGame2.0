@@ -113,7 +113,7 @@ public class Location {
     }
     
     /**
-     * Adds an NPC to the location.
+     * Adds an Action to the location.
      * @param action the new action to add to the location
      * @precondition npc != null
      */

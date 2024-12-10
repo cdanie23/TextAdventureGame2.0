@@ -127,7 +127,8 @@ public class TextAdventureViewModel {
 			ActionableItem itemAction = (ActionableItem) selectedAction;
 			this.gameManager.usePlayerActionableItem(itemAction);
 			if (itemAction.getItem().getEffect() < 0) {
-				this.gameManager.getPlayer().setDamage(itemAction.getItem().getEffect());
+				int damage = Math.abs(itemAction.getItem().getEffect());
+				this.gameManager.getPlayer().setDamage(damage);
 			}
 			this.removeOldUseActions();
 		}

@@ -122,6 +122,7 @@ public class NpcInteractTest {
     }
     
     @Test
+
     void testLootChestThenPickUpItem() {
     	 Npc chestNpc = new Npc("Chest", 10, 50, 100);
          Item sword = new Item("Sword", 5, 5, 5);
@@ -156,5 +157,10 @@ public class NpcInteractTest {
          assertTrue(location.getActions().size() == 1);
 
          assertEquals(0, chestNpc.getHealth());
+    }
+    public void testFightNpcWithWeapon() {
+    	Npc goblinNpc = new Npc("Goblin", 10, 50, 100);
+        NpcInteract fightInteraction = new NpcInteract(goblinNpc, "Fight the goblin");
+
     }
 }

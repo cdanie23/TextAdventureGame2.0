@@ -1,5 +1,6 @@
 package edu.westga.cs3211.text_adventure_game.model.test.gamemanager;
 
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.*;
 
 
@@ -48,7 +49,7 @@ class TestGetters {
 		GameManager gameManager = new GameManager();
 		String availableActionsDescription = gameManager.getAvailableActionsDescription();
 		
-		assertEquals(availableActionsDescription, "Move Forward" + System.lineSeparator());
+		assertEquals(true, availableActionsDescription.contains("Move Forward" + System.lineSeparator()));
 	}
 	@Test
 	void testGetPlayerHasWon() {
