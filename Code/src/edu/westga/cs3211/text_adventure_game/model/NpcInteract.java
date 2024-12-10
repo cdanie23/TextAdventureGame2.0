@@ -29,11 +29,12 @@ public class NpcInteract extends Action {
      * Takes the interaction action with the NPC.
      * 
      * @param character the player or character interacting
+     * @param currLocation the location the action was taken on 
      * @return a message indicating the result of the interaction
      */
-    public String takeAction(Damageable character) {
+    public String takeAction(Damageable character, Location currLocation) {
         if (this.npc.getName().equalsIgnoreCase("Chest")) {
-            return this.lootChest(character);
+            return this.lootChest(character, currLocation);
         } else if (this.npc.getName().equalsIgnoreCase("Merchant")) {
             return this.tradeWithMerchant(character);
         } else {
@@ -45,14 +46,23 @@ public class NpcInteract extends Action {
      * Loots a chest and adds items to the character's inventory.
      * 
      * @param character the character looting the chest
+     * @param currLocation the location the chest was looted
      * @return a message indicating the result of the interaction
      */
-    private String lootChest(Damageable character) {
+    private String lootChest(Damageable character, Location currLocation) {
         if (this.npc.getIsDead()) {
             return "The chest has already been looted.";
         }
-        character.getInventory().addAll(this.npc.getItems());
         this.npc.setHealth(0);
+        if (this.npc.getItems().size() == 0) {
+        	return "You looted an empty chest :(";
+        }
+        for (Item item : this.npc.getItems()) {
+        	PickUpItem itemToPickUp = new PickUpItem(item);
+        	currLocation.addAction(itemToPickUp);
+        }
+        
+        
         return "You looted the chest!";
     }
 

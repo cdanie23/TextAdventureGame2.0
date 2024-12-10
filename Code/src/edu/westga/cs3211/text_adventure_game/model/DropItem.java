@@ -18,7 +18,10 @@ public class DropItem extends ActionableItem {
 	}
 
 	@Override
-	public Boolean takeAction(Damageable character) {
+	public Boolean takeAction(Damageable character, Location currLocation) {
+		PickUpItem itemPickUp = new PickUpItem(super.getItem());
+		currLocation.addAction(itemPickUp);
 		return character.getInventory().remove(super.getItem());
 	}
+
 }

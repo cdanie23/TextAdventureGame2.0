@@ -1,29 +1,32 @@
-package edu.westga.cs3211.text_adventure_game.model.test.dropitem;
+package edu.westga.cs3211.text_adventure_game.model.test.pickupitem;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import edu.westga.cs3211.text_adventure_game.model.Action;
 import edu.westga.cs3211.text_adventure_game.model.Direction;
-import edu.westga.cs3211.text_adventure_game.model.DropItem;
 import edu.westga.cs3211.text_adventure_game.model.Item;
 import edu.westga.cs3211.text_adventure_game.model.Location;
 import edu.westga.cs3211.text_adventure_game.model.LocationType;
 import edu.westga.cs3211.text_adventure_game.model.Move;
+import edu.westga.cs3211.text_adventure_game.model.PickUpItem;
 import edu.westga.cs3211.text_adventure_game.model.Player;
 
-class TestTakeAction {
-
-	@Test
-	void testTakeAction() {
-		ArrayList<Item> startingItems = new ArrayList<Item>();
-		Item dagger = new Item("Dagger", 10, 15, 10);
-		startingItems.add(dagger);
-		Player player = new Player(startingItems);
+class TestPickUpItem {
+	private PickUpItem pickUpItem;
+	private Item item;
+	Location location;
+	Player player;
+	ArrayList<Item> startingItems;
+	@BeforeEach
+	void setupAction() {
+		item = new Item("Healing Potion", 10, 50, 10);
+		pickUpItem = new PickUpItem(item);
 		
 		String name = "Creaky Castle Gate";
 		String description = "The creaky castle gates";
@@ -33,14 +36,22 @@ class TestTakeAction {
 		adjacentLocations.put(Direction.Forward, "Creaky Castle Halls");
 		LocationType locationType = LocationType.Safe;
 		
-		Location location = new Location(name, description, actions, adjacentLocations, locationType);
-		DropItem action = new DropItem(player.getInventory().get(0));
+		location = new Location(name, description, actions, adjacentLocations, locationType);
 		
-		action.takeAction(player, location);
+		startingItems = new ArrayList<Item>();
+		startingItems.add(item);
+		player = new Player(startingItems);
+	}
+	@Test
+	void testValidConstructor() {
+		assertEquals(pickUpItem.getItem(), item);
+		assertEquals(pickUpItem.getDescription(), "Pick Up " + item.getName());
+	}
+	@Test
+	void testTakeAction() {
+		pickUpItem.takeAction(player, location);
 		
-		assertEquals(player.getInventory().size(), 0);
-		
-		assertEquals(location.getActions().size(), 2);
+		assertTrue(player.getInventory().contains(item));
 		
 	}
 

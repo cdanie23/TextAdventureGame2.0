@@ -17,7 +17,7 @@ public class UseItem extends ActionableItem {
 	}
 	  
 	@Override
-	public Boolean takeAction(Damageable character) {
+	public Boolean takeAction(Damageable character, Location currLocation) {
 		var currentHealth = character.getHealth();
 		var newHealth = currentHealth + super.getItem().getEffect();
 		

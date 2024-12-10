@@ -42,7 +42,7 @@ public class NpcManager {
      * @precondition index >= 0 && index < npcPool.size() && amount > 0 && location != null
      * @postcondition NPCs are added to the location
      */
-    public void addNpcByIndex(int index, int amount, Location location) {
+    public void addNpcByIndex(int index, int amount, Location location, int amountOfItems) {
         if (index < 0 || index >= this.npcPool.size()) {
             throw new IllegalArgumentException("Invalid index.");
         }
@@ -52,6 +52,7 @@ public class NpcManager {
 
         Npc npcToAdd = this.npcPool.get(index);
         for (int loopVar = 0; loopVar < amount; loopVar++) {
+        	this.addRandomItemsToNpc(npcToAdd, amountOfItems);
             Action npcInteraction = new NpcInteract(npcToAdd, "Interact with " + npcToAdd.getName());
             location.addNpc(npcToAdd);
             location.getActions().add(npcInteraction);
@@ -86,15 +87,16 @@ public class NpcManager {
     	int numOfItemsAdded = 0;
     	Collections.shuffle(this.itemPool);
     	for (Item item : this.itemPool) {
+    		if (numOfItemsAdded >= amountOfItems) {
+    			break;
+    		}
     		int chanceToRecieve = 100 - item.getPrice();
     		int randomNumber = this.random.nextInt(1, 100);
     		if (randomNumber <= chanceToRecieve) {
     			npc.addItem(item);
     			numOfItemsAdded++;
     		}
-    		if (numOfItemsAdded >= amountOfItems) {
-    			break;
-    		}
+    		
     	}
     }
 }
