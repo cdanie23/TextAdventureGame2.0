@@ -113,6 +113,8 @@ public class LocationReader {
 				}
 				locations.add(location);
 			}
+		} catch (FileNotFoundException error) {
+			System.err.println(FILE_COULD_NOT_BE_FOUND);
 		} catch (Exception error) {
 			System.err.println(error.getMessage());
 		}

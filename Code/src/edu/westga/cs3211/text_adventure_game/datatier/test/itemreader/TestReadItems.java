@@ -1,7 +1,5 @@
 package edu.westga.cs3211.text_adventure_game.datatier.test.itemreader;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -14,7 +12,6 @@ import edu.westga.cs3211.text_adventure_game.datatier.ItemReader;
 class TestReadItems {
 	private ItemReader itemReader;
 	private File tempFile;
-	private FileWriter fileWriter;
 	
 	@BeforeEach
 	void setupFile() throws IOException {

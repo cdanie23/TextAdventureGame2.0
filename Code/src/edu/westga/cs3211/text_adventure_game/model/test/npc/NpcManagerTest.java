@@ -23,15 +23,9 @@ import edu.westga.cs3211.text_adventure_game.model.NpcManager;
 
 public class NpcManagerTest {
 	public class NpcManagerStub extends NpcManager {
-		private List<Npc> npcPool;
-		private Random random;
-		private List<Item> itemPool;
-
 		public NpcManagerStub(List<Npc> npcPool, List<Item> itemPool) {
 			super(npcPool, itemPool);
-			this.npcPool = npcPool;
-			this.itemPool = itemPool;
-			this.random = new Random();
+			new Random();
 		}
 
 		@Override

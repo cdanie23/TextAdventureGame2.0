@@ -1,7 +1,5 @@
 package edu.westga.cs3211.text_adventure_game.datatier.test.npcreader;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
