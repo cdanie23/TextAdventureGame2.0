@@ -3,7 +3,6 @@ package edu.westga.cs3211.text_adventure_game.datatier.test.locationreader;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.reflect.Field;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

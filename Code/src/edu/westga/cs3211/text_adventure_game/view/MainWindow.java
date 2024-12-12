@@ -1,11 +1,8 @@
 package edu.westga.cs3211.text_adventure_game.view;
 
 import edu.westga.cs3211.text_adventure_game.model.Action;
-import edu.westga.cs3211.text_adventure_game.model.DropItem;
 import edu.westga.cs3211.text_adventure_game.model.Item;
-import edu.westga.cs3211.text_adventure_game.model.UseItem;
 import edu.westga.cs3211.text_adventure_game.viewmodel.TextAdventureViewModel;
-import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,7 +13,6 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
-import javafx.scene.layout.AnchorPane;
 
 /**
  * Codebehind for the Main Window of the application.
@@ -57,9 +53,6 @@ public class MainWindow {
 
     @FXML
     private Label weightTxtLabel;
-
-    @FXML
-    private Label worldNameLabel;
 	
 	private TextAdventureViewModel viewModel;
 

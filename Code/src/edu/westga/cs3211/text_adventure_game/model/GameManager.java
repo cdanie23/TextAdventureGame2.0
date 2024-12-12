@@ -2,10 +2,16 @@ package edu.westga.cs3211.text_adventure_game.model;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+
 import edu.westga.cs3211.text_adventure_game.datatier.ItemReader;
 import edu.westga.cs3211.text_adventure_game.datatier.LocationReader;
 import edu.westga.cs3211.text_adventure_game.datatier.NpcReader;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 
 /**
  * The game manager class
@@ -14,7 +20,7 @@ import edu.westga.cs3211.text_adventure_game.datatier.NpcReader;
  */
 public class GameManager {
 	public static final int MAX_WEIGHT = 100;
-	private static final String YOU_ARE_DEAD_MSG = "You are dead";
+	private static final String YOU_ARE_DEAD_MSG = "DEAD";
 	private static final String LOCATIONS_TXT_FILE = "Locations.txt";
 	private Player player;
 	private List<Location> allLocations;
@@ -47,6 +53,7 @@ public class GameManager {
 	private void initializeStartLocation() {
 		this.currLocation = this.allLocations.get(0);
 		this.currLocation.addAction(new PickUpItem(this.allItems.get(0)));
+		this.npcManager.addNpcByIndex(5, 1, this.currLocation, 1);
 		this.npcManager.addNpcByIndex(0, 1, this.currLocation, 4);
 	}
 
@@ -146,14 +153,14 @@ public class GameManager {
 		if (action == null) {
 			throw new IllegalArgumentException("action cannot be null");
 		}
-		var tOrF = action.takeAction(this.player, this.currLocation);
+		boolean tOrF = action.takeAction(this.player, this.currLocation);
 		if (action instanceof DropItem) {
 			this.itemStatus = "You have dropped " + action.getItem().getName();
 		}
 		if (action instanceof UseItem) {
 		    this.itemStatus = "You have used " + action.getItem().getName();
-		    var item = action.getItem();
-		    if (tOrF && item.getName().toLowerCase().contains("potion")) {
+		    Item item = action.getItem();
+		    if (tOrF && (item.getName().toLowerCase().contains("potion"))) {
 		        this.player.getInventory().remove(item);
 		    }
 		}
@@ -243,8 +250,60 @@ public class GameManager {
 	 */
 	public void interactWithNpc(NpcInteract npcAction) {
 
-		this.itemStatus = npcAction.takeAction(this.player, this.currLocation);
+		if (npcAction.isNpcMerchant()) {
+	        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+	        alert.setTitle("Merchant");
+	        alert.setHeaderText("Choose an Item");
+	        alert.setContentText("Click a button to select an item or close to exit:");
 
+	        List<Item> merchantInventory = npcAction.getNpc().getItems();
+	        Map<ButtonType, Item> buttonItemMap = new HashMap<>();
+	        List<ButtonType> buttonTypes = new ArrayList<>();
+	        for (Item item : merchantInventory) {
+	            ButtonType button = new ButtonType(item.toString() + "\nPrice: " + item.getPrice() + "\nWeight: " + item.getWeight());
+	            buttonTypes.add(button);
+	            buttonItemMap.put(button, item); 
+	        }
+
+	        ButtonType closeButton = new ButtonType("Exit");
+	        buttonTypes.add(closeButton);
+	        alert.getButtonTypes().setAll(buttonTypes);
+	        Optional<ButtonType> result = alert.showAndWait();
+
+	        if (result.isPresent()) {
+	            this.handleButtonPress(npcAction, buttonItemMap, closeButton, result);
+	            return;
+	        } else {
+	        	this.itemStatus = "Dialog was closed without any selection.";
+	        	return;
+	        }
+	    }
+	    this.itemStatus = npcAction.takeAction(this.player, this.currLocation);
+	}
+
+	private void handleButtonPress(NpcInteract npcAction, Map<ButtonType, Item> buttonItemMap, ButtonType closeButton,
+			Optional<ButtonType> result) {
+		ButtonType selectedButton = result.get();
+		if (selectedButton == closeButton) {
+		    this.itemStatus = "Closed the merchant trading";
+		    return;
+		} else {
+		    Item selectedItem = buttonItemMap.get(selectedButton);
+		    if (selectedItem != null) {
+		        this.handleItemSelected(npcAction, selectedItem);
+		    }
+		}
+	}
+
+	private void handleItemSelected(NpcInteract npcAction, Item selectedItem) {
+		if (this.player.getCoins() >= selectedItem.getPrice() && GameManager.MAX_WEIGHT < this.getPlayer().getTotalWeight() + selectedItem.getWeight()) {
+		    this.player.setCoins(this.player.getCoins() - selectedItem.getPrice());
+		    this.player.getInventory().add(selectedItem);
+		    npcAction.getNpc().removeItem(selectedItem);
+		} else {
+			this.itemStatus = "Not enough coins to buy " + selectedItem.getName();
+			return;
+		}
 	}
 	/**
 	 * Gets the status of players items
