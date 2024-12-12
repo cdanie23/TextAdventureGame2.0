@@ -46,8 +46,8 @@ public class GameManager {
 	
 	private void initializeStartLocation() {
 		this.currLocation = this.allLocations.get(0);
-		this.npcManager.addNpcByIndex(0, 2, this.currLocation, 2);
-		
+		this.currLocation.addAction(new PickUpItem(this.allItems.get(0)));
+		this.npcManager.addNpcByIndex(0, 1, this.currLocation, 4);
 	}
 
 	/** reads through all of the files and set up the worlds: location, NPCs, and Items

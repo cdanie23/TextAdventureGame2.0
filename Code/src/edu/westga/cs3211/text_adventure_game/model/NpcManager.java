@@ -34,7 +34,7 @@ public class NpcManager {
     }
     
     /**
-	* Adds NPCs to the current location with a 15% chance.
+	* Adds NPCs to the current location at a chance.
 	* If NPCs are added, the number of NPCs is determined by a random weight
 	* 
 	* @param currLocation this is the current location to add everything to 
@@ -42,7 +42,7 @@ public class NpcManager {
     public void addNpcsToLocation(Location currLocation) {
 	    Random random = new Random();
 
-	    if (random.nextInt(100) < 15) {
+	    if (random.nextInt(100) < 50) {
 	        int roll = random.nextInt(100);
 	        int numNpcsToAdd;
 
