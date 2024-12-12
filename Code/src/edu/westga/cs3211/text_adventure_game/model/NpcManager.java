@@ -32,6 +32,39 @@ public class NpcManager {
         this.itemPool = itemPool;
         this.random = new Random();
     }
+    
+    /**
+	* Adds NPCs to the current location with a 15% chance.
+	* If NPCs are added, the number of NPCs is determined by a random weight
+	* 
+	* @param currLocation this is the current location to add everything to 
+	*/
+    public void addNpcsToLocation(Location currLocation) {
+	    Random random = new Random();
+
+	    if (random.nextInt(100) < 15) {
+	        int roll = random.nextInt(100);
+	        int numNpcsToAdd;
+
+	        if (roll < 66) {
+	            numNpcsToAdd = 1;
+	        } else if (roll < 95) {
+	            numNpcsToAdd = 2;
+	        } else {
+	            numNpcsToAdd = 3;
+	        }
+
+	        for (int index = 0; index < numNpcsToAdd; index++) {
+	            int randomIndex = random.nextInt(this.npcPool.size());
+	            Npc npcToAdd = this.npcPool.get(randomIndex);
+	            int numOfItemsToAdd = this.random.nextInt(0, 3);
+	            this.addRandomItemsToNpc(npcToAdd, numOfItemsToAdd);
+	            Action npcInteraction = new NpcInteract(npcToAdd, "Interact with " + npcToAdd.getName());
+	            currLocation.addNpc(npcToAdd);
+	            currLocation.addAction(npcInteraction);
+	        }
+	    }
+	}
 
     /**
      * Adds NPCs to a location based on a specific index and amount.
@@ -39,6 +72,7 @@ public class NpcManager {
      * @param index    the index of the NPC in the npcPool list
      * @param amount   the number of times to add the selected NPC to the location
      * @param location the location to add the NPCs to
+     * @param amountOfItems the amount of items to add to inventory
      * @precondition index >= 0 && index < npcPool.size() && amount > 0 && location != null
      * @postcondition NPCs are added to the location
      */
@@ -96,7 +130,6 @@ public class NpcManager {
     			npc.addItem(item);
     			numOfItemsAdded++;
     		}
-    		
     	}
     }
 }

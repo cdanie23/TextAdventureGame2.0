@@ -3,8 +3,6 @@ package edu.westga.cs3211.text_adventure_game.model;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Stack;
-
 import edu.westga.cs3211.text_adventure_game.datatier.ItemReader;
 import edu.westga.cs3211.text_adventure_game.datatier.LocationReader;
 import edu.westga.cs3211.text_adventure_game.datatier.NpcReader;
@@ -38,6 +36,24 @@ public class GameManager {
 	 * @postcondition player != null && locationReader != null && allLocations != null && currentLocation != null
 	 */
 	public GameManager() {
+		this.setWorldsFeature();
+		this.setupPlayer();
+		this.initializeStartLocation();
+		this.playerHasWon = false;
+		
+		this.setupActions();
+	}
+	
+	private void initializeStartLocation() {
+		this.currLocation = this.allLocations.get(0);
+		this.npcManager.addNpcByIndex(0, 2, this.currLocation, 2);
+		
+	}
+
+	/** reads through all of the files and set up the worlds: location, NPCs, and Items
+	 * 
+	 */
+	private void setWorldsFeature() {
 		File locationFile = new File(LOCATIONS_TXT_FILE);
 		this.locationReader = new LocationReader(locationFile);
 		this.allLocations = this.locationReader.readLocations();
@@ -50,13 +66,6 @@ public class GameManager {
 		this.npcReader = new NpcReader(npcFile);
 		this.allNpcs = this.npcReader.readNpcs();
 		this.npcManager = new NpcManager(this.allNpcs, this.allItems);
-		
-		this.setupPlayer();
-		this.currLocation = this.allLocations.get(0);
-		this.npcManager.addRandomNpcs(2, this.currLocation);
-		this.playerHasWon = false;
-		
-		this.setupActions();
 	}
 	
 	/**
@@ -109,21 +118,23 @@ public class GameManager {
 	}
 	
 	/**
-	 * updates the location after a move action
+	 * Updates the location after a move action and potentially adds NPCs to the new location.
+	 * 
 	 * @param action the move action taken
 	 * @precondition: action != null
 	 * @postcondition: this.currLocation == newLocation
 	 */
 	public void updateLocation(Move action) {
-		if (action == null) {
-			throw new IllegalArgumentException(Location.ACTIONS_CANNOT_BE_NULL);
-		}
-		 
-		this.currLocation = action.takeAction(this.currLocation.getAdjacentLocations(), this.allLocations);
-		this.checkForTrapLocation();
-		this.checkForGoalLocation(); 
-		this.setupActions();
-		this.itemStatus = "";
+	    if (action == null) {
+	        throw new IllegalArgumentException(Location.ACTIONS_CANNOT_BE_NULL);
+	    }
+
+	    this.currLocation = action.takeAction(this.currLocation.getAdjacentLocations(), this.allLocations);
+	    this.checkForTrapLocation();
+	    this.checkForGoalLocation();
+	    this.setupActions();
+	    this.itemStatus = "You moved to a new location. ";
+	    this.npcManager.addNpcsToLocation(this.currLocation);
 	}
 	
 	/**
@@ -135,16 +146,21 @@ public class GameManager {
 		if (action == null) {
 			throw new IllegalArgumentException("action cannot be null");
 		}
+		var tOrF = action.takeAction(this.player, this.currLocation);
 		if (action instanceof DropItem) {
 			this.itemStatus = "You have dropped " + action.getItem().getName();
 		}
 		if (action instanceof UseItem) {
-			this.itemStatus = "You have used " + action.getItem().getName();
+		    this.itemStatus = "You have used " + action.getItem().getName();
+		    var item = action.getItem();
+		    if (tOrF && item.getName().toLowerCase().contains("potion")) {
+		        this.player.getInventory().remove(item);
+		    }
 		}
 		if (action instanceof PickUpItem) {
 			this.itemStatus = "You have picked up " + action.getItem().getName();
 		}
-		return action.takeAction(this.player, this.currLocation);
+		return tOrF;
 	}
 
 	private void checkForTrapLocation() {
