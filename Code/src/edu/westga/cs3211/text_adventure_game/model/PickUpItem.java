@@ -17,7 +17,10 @@ public class PickUpItem extends ActionableItem {
 
 	@Override
 	public Boolean takeAction(Damageable character, Location currLocation) {
-		currLocation.getActions().remove(this);
-		return character.getInventory().add(super.getItem());
+		if ((character.getTotalWeight() + super.getItem().getWeight()) <= GameManager.MAX_WEIGHT) {
+			currLocation.getActions().remove(this);
+			return character.getInventory().add(super.getItem());
+		}
+		return false;
 	}
 }
