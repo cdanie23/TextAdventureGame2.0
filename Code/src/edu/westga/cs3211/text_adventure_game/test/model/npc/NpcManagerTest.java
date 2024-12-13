@@ -22,96 +22,112 @@ import edu.westga.cs3211.text_adventure_game.model.NpcInteract;
 import edu.westga.cs3211.text_adventure_game.model.NpcManager;
 
 public class NpcManagerTest {
-	public class NpcManagerStub extends NpcManager {
-		public NpcManagerStub(List<Npc> npcPool, List<Item> itemPool) {
-			super(npcPool, itemPool);
-			new Random();
-		}
+	 // Stub class for testing NpcManager
+    public class NpcManagerStub extends NpcManager {
+        public NpcManagerStub(List<Npc> npcPool, List<Item> itemPool) {
+            super(npcPool, itemPool);
+        }
 
-		@Override
-		public void addRandomNpcs(int amount, Location location) {
-			Npc chest1 = new Npc("Chest", 0, 50, 999);
-			Npc enemy = new Npc("Dragon", 0, 50, 200);
-			this.addRandomItemsToNpc(chest1, 2);
-			this.addRandomItemsToNpc(enemy, 2);
-			location.addNpc(chest1);
-			location.addNpc(enemy);
-			Action npcInteraction1 = new NpcInteract(chest1, "Interact with " + chest1.getName());
-			Action npcInteraction2 = new NpcInteract(enemy, "Interact with " + chest1.getName());
-			location.addAction(npcInteraction1);
-			location.addAction(npcInteraction2);
-		}
+        @Override
+        public void addRandomNpcs(int amount, Location location) {
+            Npc chest1 = new Npc("Chest", 0, 50, 999);
+            Npc enemy = new Npc("Dragon", 0, 50, 200);
+            // Add items to NPCs
+            addRandomItemsToNpc(chest1, 2);
+            addRandomItemsToNpc(enemy, 2);
+            // Add NPCs to location
+            location.addNpc(chest1);
+            location.addNpc(enemy);
+            Action npcInteraction1 = new NpcInteract(chest1, "Interact with " + chest1.getName());
+            Action npcInteraction2 = new NpcInteract(enemy, "Interact with " + enemy.getName());
+            location.addAction(npcInteraction1);
+            location.addAction(npcInteraction2);
+        }
 
-		private void addRandomItemsToNpc(Npc npc, int amountOfItems) {
-			Item dagger = new Item("Dagger", 10, -25, 10);
-			Item posionPotion = new Item("Posion Potion", 10, -40, 10);
+        private void addRandomItemsToNpc(Npc npc, int amountOfItems) {
+            Item dagger = new Item("Dagger", 10, -25, 10);
+            Item poisonPotion = new Item("Poison Potion", 10, -40, 10);
+            for (int i = 0; i < amountOfItems; i++) {
+                if (i == 0) npc.addItem(dagger);
+                if (i == 1) npc.addItem(poisonPotion);
+            }
+        }
+    }
 
-			npc.addItem(posionPotion);
-			npc.addItem(dagger);
-		}
-	}
+    private NpcManager npcManager;
+    private NpcManagerStub npcManagerStub;
+    private ArrayList<Npc> npcPool;
+    private Location location;
+    private List<Item> itemPool;
+    private ItemReader itemReader;
 
-	private NpcManager npcManager;
-	private NpcManagerStub npcManagerStub;
-	private ArrayList<Npc> npcPool;
-	private Location location;
-	private List<Item> itemPool;
-	private ItemReader itemReader;
+    @BeforeEach
+    public void setUp() {
+        // Setup NPC pool
+        npcPool = new ArrayList<>();
+        npcPool.add(new Npc("Goblin", 10, 50, 100));
+        npcPool.add(new Npc("Merchant", 5, 30, 80));
+        npcPool.add(new Npc("Chest", 0, 0, 0));
 
-	@BeforeEach
-	public void setUp() {
-		this.npcPool = new ArrayList<>();
-		npcPool.add(new Npc("Goblin", 10, 50, 100));
-		npcPool.add(new Npc("Merchant", 5, 30, 80));
-		npcPool.add(new Npc("Chest", 0, 0, 0));
+        // Setup item pool via ItemReader (ensure it reads correctly)
+        File itemFile = new File("Items.txt");
+        this.itemReader = new ItemReader(itemFile);
+        this.itemPool = itemReader.readItems();
 
-		File itemFile = new File("Items.txt");
-		this.itemReader = new ItemReader(itemFile);
-		this.itemPool = this.itemReader.readItems();
+        // Setup location
+        String name = "Forest";
+        String description = "A dense forest filled with mystery.";
+        ArrayList<Action> actions = new ArrayList<>();
+        HashMap<Direction, String> adjacentLocations = new HashMap<>();
+        adjacentLocations.put(Direction.Forward, "Village");
+        adjacentLocations.put(Direction.Left, "Cave");
+        adjacentLocations.put(Direction.Right, "Lake");
+        adjacentLocations.put(Direction.Backward, "Mountain");
+        LocationType locationType = LocationType.Safe;
+        location = new Location(name, description, actions, adjacentLocations, locationType);
 
-		String name = "Forest";
-		String description = "A dense forest filled with mystery.";
-		ArrayList<Action> actions = new ArrayList<>();
+        // Initialize NpcManager and stub
+        npcManager = new NpcManager(npcPool, itemPool);
+        npcManagerStub = new NpcManagerStub(npcPool, itemPool);
+    }
 
-		HashMap<Direction, String> adjacentLocations = new HashMap<>();
-		adjacentLocations.put(Direction.Forward, "Village");
-		adjacentLocations.put(Direction.Left, "Cave");
-		adjacentLocations.put(Direction.Right, "Lake");
-		adjacentLocations.put(Direction.Backward, "Mountain");
+    @Test
+    public void testAddNpcByIndex() {
+        npcManager.addNpcByIndex(0, 2, location, 2);
+        assertEquals(2, location.getNpcs().size(), "NPCs should be added to the location.");
+        assertEquals(2, location.getActions().size(), "Actions should be added to the location.");
+    }
 
-		LocationType locationType = LocationType.Safe;
+    @Test
+    public void testAddNpcByIndexInvalidIndex() {
+        assertThrows(IllegalArgumentException.class, () -> npcManager.addNpcByIndex(10, 1, location, 2),
+                "Invalid index should throw IllegalArgumentException.");
+    }
 
-		location = new Location(name, description, actions, adjacentLocations, locationType);
+    @Test
+    public void testAddRandomNpcs() {
+        npcManager.addRandomNpcs(3, location);
+        assertEquals(3, location.getNpcs().size(), "3 random NPCs should be added to the location.");
+        assertEquals(3, location.getActions().size(), "3 actions should be added to the location.");
+    }
 
-		npcManager = new NpcManager(npcPool, itemPool);
-		
-		npcManagerStub = new NpcManagerStub(npcPool, itemPool);
-	}
+    @Test
+    public void testAddRandomItemsToNpc() {
+        npcManagerStub.addRandomNpcs(2, location);
 
-	@Test
-	public void testAddNpcByIndex() {
-		npcManager.addNpcByIndex(0, 2, location, 2);
-		assertEquals(2, location.getNpcs().size(), "NPCs should be added to the location.");
-		assertEquals(2, location.getActions().size(), "Actions should be added to the location.");
-	}
+        Npc npcOne = location.getNpcs().get(0);
+        Npc npcTwo = location.getNpcs().get(1);
 
-	@Test
-	public void testAddNpcByIndexInvalidIndex() {
-		assertThrows(IllegalArgumentException.class, () -> npcManager.addNpcByIndex(10, 1, location, 2),
-				"Invalid index should throw IllegalArgumentException.");
-	}
+        assertEquals(2, npcOne.getItems().size(), "NPC One should have 2 items.");
+        assertEquals(2, npcTwo.getItems().size(), "NPC Two should have 2 items.");
+    }
+
+    
 
 	@Test
 	public void testAddNpcByIndexInvalidAmount() {
 		assertThrows(IllegalArgumentException.class, () -> npcManager.addNpcByIndex(0, -1, location, 2),
 				"Amount must be greater than 0.");
-	}
-
-	@Test
-	public void testAddRandomNpcs() {
-		npcManager.addRandomNpcs(3, location);
-		assertEquals(3, location.getNpcs().size(), "3 random NPCs should be added to the location.");
-		assertEquals(3, location.getActions().size(), "3 actions should be added to the location.");
 	}
 
 	@Test
@@ -144,16 +160,5 @@ public class NpcManagerTest {
 	@Test
 	public void testLocationType() {
 		assertEquals(LocationType.Safe, location.getLocationType(), "The location type should be 'Safe'.");
-	}
-
-	@Test
-	void testAddRandomItemsToNpc() {
-		this.npcManagerStub.addRandomNpcs(2, location);
-
-		Npc npcOne = location.getNpcs().get(0);
-		Npc npcTwo = location.getNpcs().get(1);
-
-		assertEquals(npcOne.getItems().size(), 2);
-		assertEquals(npcTwo.getItems().size(), 2);
 	}
 }

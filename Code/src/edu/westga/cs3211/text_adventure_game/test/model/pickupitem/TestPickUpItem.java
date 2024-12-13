@@ -23,6 +23,7 @@ class TestPickUpItem {
 	Location location;
 	Player player;
 	ArrayList<Item> startingItems;
+	
 	@BeforeEach
 	void setupAction() {
 		item = new Item("Healing Potion", 10, 50, 10);
@@ -42,11 +43,13 @@ class TestPickUpItem {
 		startingItems.add(item);
 		player = new Player(startingItems);
 	}
+	
 	@Test
 	void testValidConstructor() {
 		assertEquals(pickUpItem.getItem(), item);
 		assertEquals(pickUpItem.getDescription(), "Pick Up " + item.getName());
 	}
+	
 	@Test
 	void testTakeAction() {
 		pickUpItem.takeAction(player, location);
@@ -54,5 +57,15 @@ class TestPickUpItem {
 		assertTrue(player.getInventory().contains(item));
 		
 	}
+	
+	 @Test
+	    void testPickUpItemWhenInventoryHasMaxWeight() {
+	       	this.player.getInventory().add(new Item("Heavy Weight", 99, 50, 10));
+	       	this.player.getInventory().remove(0);
+	       	
+	       	pickUpItem.takeAction(player, location);
+			
+			assertFalse(player.getInventory().contains(item));
+	    }
 
 }
