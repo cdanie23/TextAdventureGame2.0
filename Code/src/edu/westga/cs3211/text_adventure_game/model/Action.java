@@ -1,7 +1,5 @@
 package edu.westga.cs3211.text_adventure_game.model;
 
-import edu.westga.cs3211.text_adventure_game.utilities.Helper;
-
 /**
  * The actions class
  * 
@@ -20,7 +18,12 @@ public abstract class Action {
 	 *                    this.actionType == actionType
 	 */
 	public Action(String description) {
-		Helper.throwExceptionForIllegalArgument(description);
+		if (description == null) {
+			throw new IllegalArgumentException("description can not be null");
+		}
+		if (description.isBlank()) {
+			throw new IllegalArgumentException("description can not be blank");
+		}
 		this.description = description;
 
 	}

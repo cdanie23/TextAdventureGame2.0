@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import edu.westga.cs3211.text_adventure_game.utilities.Helper;
-
 /**
  * The location class
  * @author Colby and Jacob
@@ -55,8 +53,18 @@ public class Location {
      * @postconditions: this.name == name && this.description == description && this.locationType == locationType
      */
     public Location(String name, String description, LocationType locationType) {
-        Helper.throwExceptionForIllegalArgument(name);
-        Helper.throwExceptionForIllegalArgument(description);
+    	if (name == null) {
+    		throw new IllegalArgumentException("name can not be null");
+    	}
+    	if (name.isBlank()) {
+    		throw new IllegalArgumentException("name can not be black");
+    	}
+    	if (description == null) {
+    		throw new IllegalArgumentException("description can not be null");
+    	}
+    	if (description.isBlank()) {
+    		throw new IllegalArgumentException("description can not be black");
+    	}
         if (locationType == null) {
             throw new IllegalArgumentException(LOCATION_TYPE_NULL_MSG);
         }
