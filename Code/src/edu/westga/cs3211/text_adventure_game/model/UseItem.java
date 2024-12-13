@@ -29,6 +29,12 @@ public class UseItem extends ActionableItem {
 		character.setHealth(newHealth);
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "Use " + this.getItem().getName();
+	}
+	
 	
 }
 

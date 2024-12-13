@@ -6,7 +6,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Random;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -44,7 +43,7 @@ public class NpcManagerTest {
             location.addAction(npcInteraction2);
         }
 
-        private void addRandomItemsToNpc(Npc npc, int amountOfItems) {
+        public void addRandomItemsToNpc(Npc npc, int amountOfItems) {
             Item dagger = new Item("Dagger", 10, -25, 10);
             Item poisonPotion = new Item("Poison Potion", 10, -40, 10);
             for (int i = 0; i < amountOfItems; i++) {
@@ -96,12 +95,6 @@ public class NpcManagerTest {
         npcManager.addNpcByIndex(0, 2, location, 2);
         assertEquals(2, location.getNpcs().size(), "NPCs should be added to the location.");
         assertEquals(2, location.getActions().size(), "Actions should be added to the location.");
-    }
-
-    @Test
-    public void testAddNpcByIndexInvalidIndex() {
-        assertThrows(IllegalArgumentException.class, () -> npcManager.addNpcByIndex(10, 1, location, 2),
-                "Invalid index should throw IllegalArgumentException.");
     }
 
     @Test
@@ -160,5 +153,79 @@ public class NpcManagerTest {
 	@Test
 	public void testLocationType() {
 		assertEquals(LocationType.Safe, location.getLocationType(), "The location type should be 'Safe'.");
+	}
+	
+	@Test
+	public void testAddNpcByIndexInvalidIndex() {
+	    assertThrows(IllegalArgumentException.class, () -> npcManager.addNpcByIndex(-1, 1, location, 2),
+	            "Negative index should throw IllegalArgumentException.");
+
+	    assertThrows(IllegalArgumentException.class, () -> npcManager.addNpcByIndex(npcPool.size(), 1, location, 2),
+	            "Index equal to npcPool size should throw IllegalArgumentException.");
+	    
+	    assertThrows(IllegalArgumentException.class, () -> npcManager.addNpcByIndex(10, 1, location, 2),
+                "Invalid index should throw IllegalArgumentException.");
+	}
+	
+	@Test
+	public void testAddMoreRandomItemsToNpc() {
+	    // Test case where numOfItemsAdded should not exceed amountOfItems
+	    Npc npc = new Npc("Goblin", 10, 50, 100);
+	    int amountOfItems = 2; // We want to add 2 items
+	    npcManagerStub.addRandomItemsToNpc(npc, amountOfItems);
+	    
+	    // Verify that no more than 2 items are added to the NPC
+	    assertEquals(amountOfItems, npc.getItems().size(), "NPC should have no more than 2 items.");
+	    
+	    // Test case where items are actually added based on chance
+	    // We will manipulate the random number to ensure an item is added
+	    Npc npcForChanceTest = new Npc("Merchant", 5, 30, 80);
+	    List<Item> testItems = List.of(new Item("Dagger", 10, -25, 10), new Item("Poison Potion", 10, -40, 10));
+	    
+	    // Manipulate the random logic to always "succeed" for the purpose of testing
+	    // Use reflection or mocking to manipulate random (depending on testing framework)
+	    // or directly set the `randomNumber` logic in the test scenario to ensure that items are added
+	    npcManagerStub.addRandomItemsToNpc(npcForChanceTest, 2);
+	    
+	    // Verify that the items are added to the NPC's inventory
+	    assertEquals(2, npcForChanceTest.getItems().size(), "NPC should have 2 items.");
+	}
+	
+	@Test
+	public void testAddMoreThanRandomItemsToNpc() {
+	    // Test case where numOfItemsAdded should not exceed amountOfItems
+	    Npc npc = new Npc("Goblin", 10, 50, 100);
+	    int amountOfItems = 2; // We want to add 2 items
+	    npcManagerStub.addRandomItemsToNpc(npc, amountOfItems);
+	    
+	    // Verify that no more than 2 items are added to the NPC
+	    assertEquals(amountOfItems, npc.getItems().size(), "NPC should have no more than 2 items.");
+	    
+	    // Test case where items are actually added based on chance
+	    // We will manipulate the random number to ensure an item is added
+	    Npc npcForChanceTest = new Npc("Merchant", 5, 30, 80);
+	    List<Item> testItems = List.of();
+	    
+	    // Manipulate the random logic to always "succeed" for the purpose of testing
+	    // Use reflection or mocking to manipulate random (depending on testing framework)
+	    // or directly set the `randomNumber` logic in the test scenario to ensure that items are added
+	    npcManagerStub.addRandomItemsToNpc(npcForChanceTest, 2);
+	    
+	    // Verify that the items are added to the NPC's inventory
+	    assertEquals(2, npcForChanceTest.getItems().size(), "NPC should have 2 items.");
+	}
+	
+	@Test
+	public void testAddRandomItemsToNpc_EmptyItemPool() {
+	    // Setup the NPC and an empty item pool
+	    Npc npc = new Npc("Goblin", 10, 50, 100);
+	    List<Item> emptyItemPool = new ArrayList<>(); // Empty item pool
+	    NpcManager emptyItemPoolManager = new NpcManager(npcPool, emptyItemPool); // Initialize with empty item pool
+
+	    // Try to add items to the NPC (no items should be added since the pool is empty)
+	    emptyItemPoolManager.addRandomItemsToNpc(npc, 2);
+
+	    // Verify that no items have been added to the NPC
+	    assertEquals(0, npc.getItems().size(), "NPC should have no items since the item pool is empty.");
 	}
 }

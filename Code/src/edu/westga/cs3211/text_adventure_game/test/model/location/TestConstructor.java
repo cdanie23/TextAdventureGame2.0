@@ -109,5 +109,76 @@ class TestConstructor {
 		assertEquals(location.getDescription(), description);
 		assertEquals(location.getLocationType(), locationType);
 	}
+	
+	@Test
+    public void testLocationConstructor_ValidInput() {
+        // Setup
+        String name = "Test Location";
+        String description = "This is a test location.";
+        LocationType locationType = LocationType.Safe; // Assume Safe is a valid LocationType
+        
+        // Action
+        Location location = new Location(name, description, locationType);
+        
+        // Verify
+        assertEquals(name, location.getName(), "The name should be correctly set.");
+        assertEquals(description, location.getDescription(), "The description should be correctly set.");
+        assertEquals(locationType, location.getLocationType(), "The location type should be correctly set.");
+    }
 
+    @Test
+    public void testLocationConstructor_NameNull() {
+        // Setup
+        String name = null;
+        String description = "This is a test location.";
+        LocationType locationType = LocationType.Safe;
+
+        // Action & Verify
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            new Location(name, description, locationType);
+        });
+        assertEquals("name can not be null", exception.getMessage(), "Exception message should be 'name can not be null'");
+    }
+
+    @Test
+    public void testLocationConstructor_NameBlank() {
+        // Setup
+        String name = "";
+        String description = "This is a test location.";
+        LocationType locationType = LocationType.Safe;
+
+        // Action & Verify
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            new Location(name, description, locationType);
+        });
+        assertEquals("name can not be black", exception.getMessage(), "Exception message should be 'name can not be black'");
+    }
+
+    @Test
+    public void testLocationConstructor_DescriptionNull() {
+        // Setup
+        String name = "Test Location";
+        String description = null;
+        LocationType locationType = LocationType.Safe;
+
+        // Action & Verify
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            new Location(name, description, locationType);
+        });
+        assertEquals("description can not be null", exception.getMessage(), "Exception message should be 'description can not be null'");
+    }
+
+    @Test
+    public void testLocationConstructor_DescriptionBlank() {
+        // Setup
+        String name = "Test Location";
+        String description = "";
+        LocationType locationType = LocationType.Safe;
+
+        // Action & Verify
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            new Location(name, description, locationType);
+        });
+        assertEquals("description can not be black", exception.getMessage(), "Exception message should be 'description can not be black'");
+    }
 }

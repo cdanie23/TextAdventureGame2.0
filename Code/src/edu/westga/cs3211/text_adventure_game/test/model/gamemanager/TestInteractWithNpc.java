@@ -41,7 +41,7 @@ class TestInteractWithNpc {
 			location.addAction(npcInteraction2);
 		}
 
-		private void addRandomItemsToNpc(Npc npc, int amountOfItems) {
+		public void addRandomItemsToNpc(Npc npc, int amountOfItems) {
 			Item dagger = new Item("Dagger", 10, -25, 10);
 			Item posionPotion = new Item("Posion Potion", 10, -40, 10);
 

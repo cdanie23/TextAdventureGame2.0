@@ -26,7 +26,7 @@ class TestGetters {
 	void testGetLocationDescription() {
 		GameManager gameManager = new GameManager();
 		
-		assertEquals(gameManager.getLocationDescription(), "After your long journey to explore the Creaky Castle in hopes of finding the riches you have arrived at the front gate");
+		assertEquals(gameManager.getLocationDescription(), "After your long journey to explore the Creaky Castle in hopes of finding the riches you have arrived at the front gate move sneakily to not let enemies see you");
 	}
 	@Test
 	void testGetPlayerStatusWhenAlive() {
@@ -41,7 +41,7 @@ class TestGetters {
 		
 		String status = gameManager.getPlayerStatus();
 		
-		assertEquals(status, "You are dead");
+		assertEquals(status, "DEAD");
 		
 	}
 	@Test

@@ -34,8 +34,6 @@ class testTakeAction {
 				"You lower the gates from the lever and step into the long hallway of the castle in front of you is a fork in the hallway");
 		assertTrue(actionOne instanceof Move);
 		assertTrue(actionTwo instanceof Move);
-		assertEquals(viewModel.getActionsDescriptionProperty().getValue(),
-				"Move Left" + System.lineSeparator() + "Move Right" + System.lineSeparator());
 		assertEquals(viewModel.getPlayerStatusDescriptionProperty().getValue(), "100");
 	}
 

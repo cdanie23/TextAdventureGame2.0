@@ -117,7 +117,13 @@ public class NpcManager {
         }
     }
     
-    private void addRandomItemsToNpc(Npc npc, int amountOfItems) {
+    /**
+     * Adds random items to npc
+     * 
+     * @param npc the npc that items are added to
+     * @param amountOfItems the amount of items the npc gets added
+     */
+    public void addRandomItemsToNpc(Npc npc, int amountOfItems) {
     	int numOfItemsAdded = 0;
     	Collections.shuffle(this.itemPool);
     	for (Item item : this.itemPool) {
