@@ -15,7 +15,7 @@ import javafx.scene.control.ButtonType;
 
 /**
  * The game manager class
- * @author Colby and Jacob
+ * @author Colby, Jacob, and Kate
  * @version Fall 2024
  */
 public class GameManager {

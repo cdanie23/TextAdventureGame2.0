@@ -180,7 +180,7 @@ public class NpcManagerTest {
 	    // Test case where items are actually added based on chance
 	    // We will manipulate the random number to ensure an item is added
 	    Npc npcForChanceTest = new Npc("Merchant", 5, 30, 80);
-	    List<Item> testItems = List.of(new Item("Dagger", 10, -25, 10), new Item("Poison Potion", 10, -40, 10));
+	    List.of(new Item("Dagger", 10, -25, 10), new Item("Poison Potion", 10, -40, 10));
 	    
 	    // Manipulate the random logic to always "succeed" for the purpose of testing
 	    // Use reflection or mocking to manipulate random (depending on testing framework)
@@ -204,7 +204,6 @@ public class NpcManagerTest {
 	    // Test case where items are actually added based on chance
 	    // We will manipulate the random number to ensure an item is added
 	    Npc npcForChanceTest = new Npc("Merchant", 5, 30, 80);
-	    List<Item> testItems = List.of();
 	    
 	    // Manipulate the random logic to always "succeed" for the purpose of testing
 	    // Use reflection or mocking to manipulate random (depending on testing framework)

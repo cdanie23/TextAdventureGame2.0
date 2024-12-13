@@ -20,7 +20,7 @@ import edu.westga.cs3211.text_adventure_game.model.TrapLocation;
 /**
  * The location reader class
  * 
- * @author Colby
+ * @author Colby, Jacob, and Kate
  * @version Fall 2024
  */
 public class LocationReader {

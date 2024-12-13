@@ -1,31 +1,101 @@
-Use Item from Inventory 
+Use Item from Inventory
 
-Context 
+Context
 
-	Player has one or more items in their inventory. 
+	The player has one or more items in their inventory.
 
-	The current location and/or player status may require the use of an item (e.g., attacking an enemy). 
+	Items can have specific effects depending on the context (e.g., healing health, poisoning an enemy, or dealing damage).
 
-Primary Flow 
+	The current location, player status, or presence of enemies may require item use.
 
-	1. User selects an item from the inventory. 
+Primary Flow
 
-	2. System verifies that the item can be used in the current context(e.g., an enemy can be attacked)
+	User selects an item from the inventory.
 
-	3. System applies the item’s effect (e.g., heals health, damages an enemy). 
+		System verifies that the item can be used in the current context:
 
-	4. System updates the player status and/or enemies based on the effect
+			For example, a healing potion can only be used if the player's health is not full, or a weapon can only be used if there is an enemy present.
 
-	5. System displays updated item status or enemy status
+		System applies the item's effect:
 
-	6. System identifies available actions based on updated status of location or enemies
+			Healing Potion: Increases the player's health.
 
-Alternative Flows 
+			Poison Potion: Deals damage to an enemy over time.
 
-	Item cannot be used in the current context: 
+			Weapon/Attack Item: Deals instant damage to an enemy.
 
-		A2. System checks item usage rules and determines the item cannot be used. 
+		System updates the player's status, inventory, and/or enemy's status based on the item's effect:
 
-		A3. System displays a message indicating the item is not usable in the current context. 
+			Healing Potion: Updates the player's health and removes the potion from the inventory.
 
-		A4. System returns to the primary flow's step 6. 
+			Poison Potion: Applies a poison status effect to the enemy and removes the potion from the inventory.
+
+			Weapon/Attack Item: Reduces the enemy's health and updates its status.
+
+		System displays the updated item status, player status, or enemy status.
+
+		System identifies and displays available actions based on the updated location, player status, or enemy's status.
+
+Alternative Flows
+
+	Item cannot be used in the current context:
+
+		A2. System checks the rules for item usage and determines the item cannot be used.
+
+		A3. System displays a message indicating the item cannot be used in the current context.
+
+		A4. System returns to the primary flow’s step 6.
+
+	Healing Potion Scenario:
+
+		A2. System detects that the player is injured but not at full health.
+
+		A3. System applies the potion’s effect, increasing the player’s health by a specified amount (e.g., +50 health).
+
+		A4. System updates the player’s status:
+
+			For example: If the player had 70/100 health and the potion heals 50, the player’s health becomes 100/100 (but not above max health).
+
+		A5. System removes the used potion from the inventory.
+
+		A6. System displays a players health message.
+
+		A7. System identifies and displays updated actions based on the player’s new health status.
+
+	Poison Potion Scenario:
+
+		A2. System detects that there is an enemy present and verifies that the poison potion can be applied to the enemy.
+
+		A3. System applies the poison potion’s effect.
+
+		A4. System updates the enemy’s health and status.
+
+		A5. System removes the used poison potion from the inventory.
+
+		A6. System displays a enemy damaged message.
+
+		A7. System identifies and displays updated actions based on the enemy’s poisoned status.
+
+	Damaging an Enemy Scenario (Using a Weapon):
+
+		A2. System detects that there is an enemy present and verifies that the selected item (e.g., a sword) can be used to deal damage.
+
+		A3. System applies the damage effect to the enemy:
+
+			For example: A sword deals -20 damage to the enemy’s health.
+
+		A4. System updates the enemy’s health:
+
+			For example: If the enemy had 100/100 health, it is now reduced to 80/100.
+
+		A5. System displays the updated enemy status:
+
+			For example: "You attacked the enemy with your sword. Enemy health: 80/100."
+
+		A6. System checks the enemy’s health:
+
+			If the enemy’s health reaches 0 or below, the enemy is defeated, and the player gains rewards (e.g., coins or items).
+
+			Otherwise, the enemy attacks back, reducing the player’s health.
+
+		A7. System displays the result of the enemy’s counterattack (if applicable) and identifies updated actions for the player.

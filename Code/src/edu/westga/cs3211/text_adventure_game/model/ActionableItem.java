@@ -3,7 +3,7 @@ package edu.westga.cs3211.text_adventure_game.model;
 /**
  * The actionable item class
  * 
- * @author Colby
+ * @author Colby, Kate, and Jacob
  * @version Fall 2024
  */
 public abstract class ActionableItem extends Action {

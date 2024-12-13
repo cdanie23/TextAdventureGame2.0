@@ -4,7 +4,7 @@ import java.util.List;
 
 /**
  * The damagable abstract class
- * @author Colby
+ * @author Colby, Kate, and Jacob
  * @version Fall 2024
  */
 public abstract class Damageable { 

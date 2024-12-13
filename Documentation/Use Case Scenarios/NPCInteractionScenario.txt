@@ -1,36 +1,80 @@
-Interact with an NPC at a Location 
+Interact with an NPC at a Location
 
-Context 
+Context
 
-	Player is in a location with one or more NPCs. 
-	NPC interaction may involve dialogue, trading, or triggering quests. 
+	The player is in a location with one or more NPCs. NPC interaction may involve opening a chest, trading with a merchant, or triggering combat with an enemy.
 
-Primary Flow 
+Primary Flow
 
-	1. System displays the available interaction options (e.g., talk, trade, fight, accept quest). 
-	
-	2. User selects an interaction option. 
-	
-	3. System processes the selected interaction (e.g., updates dialogue, starts a trade, initiates combat). 
-	
-	4. System updates player status, inventory, or quest log based on the interaction outcome. 
-	
-	5. System displays a message or changes based on the outcome of the interaction. 
-	
+	1 System displays the available interaction options (e.g., "Interact with Chest," "Interact with Merchant," "Interact with Enemy").
+	2 User selects an interaction option.
+	3 System processes the selected interaction (e.g., drops items, starts trading, or initiates combat).
+	4 System updates the player’s status and inventory based on the interaction outcome.
+	5 System displays a message or feedback based on the interaction's outcome.
+
 Alternative Flows
- 
-	NPC has no interaction options available: 
-	
-		A3. System detects the NPC has no available interactions (e.g., already talked, traded, or completed quest). 
-		
-		A4. System displays a message indicating no interaction is possible. 
-		
-		A5. System returns to the primary flow’s step 5. 
 
-	NPC interaction fails (e.g., insufficient resources): 
-	
-		A4. System checks the requirements for the selected interaction. 
-		
-		A5. System determines the player does not meet the requirements (e.g., lacks currency or items). 
-		
-		A6. System returns to the primary flow's step 5. 
+
+	Chest Interaction
+		Chest is unlooted:
+
+			A3. System detects the player selects "Interact with Chest"
+			A4. System determines the chest is unlooted.
+			A5. System drops a random number of random items into the environment (not added directly to the inventory).
+			A6. Items are added as available actions for the player (e.g., "Pick up Item X").
+			A7. System updates the chest’s state to "looted."
+			A8. System displays the action message
+			A9. System returns to the primary flow’s step 5.
+		Chest is already looted:
+
+			A3. System detects the player selects "Interact with Chest"
+			A4. System determines the chest is already looted.
+			A5. System displays the message: "This chest has already been looted and cannot be opened again."
+			A6. System returns to the primary flow’s step 5.
+
+
+	Merchant Interaction
+		Successful trade:
+
+			A3. System detects the player selects "Interact with Merchant"
+			A4. System determines the player has sufficient currency and weight capacity.
+			A5. A trading UI opens, displaying the merchant's inventory and the player’s inventory.
+			A6. Player selects items to purchase, and the system deducts the cost from the player’s currency.
+			A7. System updates the player’s inventory with the selected items.
+			A8. System displays the message: "You traded with the merchant."
+			A9. System returns to the primary flow’s step 5.
+		Insufficient currency:
+
+			A3. System detects the player selects "Interact with Merchant"
+			A4. System determines the player lacks sufficient currency.
+			A5. System displays the action message
+			A6. System displays closing statement.
+			A7. System returns to the primary flow’s step 5.
+		Exceeds weight limit:
+
+			A3. System detects the player selects "Interact with Merchant"
+			A4. System determines the trade would exceed the player’s weight capacity.
+			A5. System displays the action message
+			A6. System displays: "You traded with the merchant," but no items are exchanged.
+			A7. System returns to the primary flow’s step 5.
+
+
+	Enemy Interaction
+		Attack enemy:
+
+			A3. System detects the player selects "Interact with Enemy"
+			A4. System determines if the player is using a weapon or bare hands.
+			A5. System calculates damage based on the selected weapon or bare-handed attack.
+			A6. System reduces the enemy’s health by the calculated damage.
+			A7. If the enemy’s health is above 0:
+				A7.1. Enemy counterattacks, reducing the player’s health.
+				A7.2. System displays the attack message
+				A7.3. System returns to the primary flow’s step 5.
+		Enemy defeated:
+
+			A3. System detects the player’s attack reduces the enemy’s health to 0 or below.
+			A4. System marks the enemy as "dead."
+			A5. System generates a reward (e.g., coins or items) for the player.
+			A6. System updates the player’s inventory and quest log (if applicable).
+			A7. System displays the message: "You defeated the enemy and earned X coins!"
+			A8. System returns to the primary flow’s step 5.

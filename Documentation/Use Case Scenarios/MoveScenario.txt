@@ -7,52 +7,41 @@ Context
 	World has a set of (interconnected) locations with some hazard locations and at least one goal location
 
 
-
 Primary Flow
-
-	1.	User selects a move action
-
-	2.	System does not detect any hazards/goal in the new location
-
-	3.	System updates players location
-
-	4.	System displays new location description
-
-	5.	System identifies available actions based on location and plater status/inventory
-
-	6.	System displays available actions
-
-
+	User selects a move action.
+		System checks for hazards, NPCs, or the goal in the new location.
+		If none are detected, proceed to step 3.
+		System updates the player’s location to the new location.
+		System dynamically updates the new location's content:
+			If applicable, the system calls to spawn NPCs.
+			New NPCs are initialized with their respective actions.
+		System displays the new location’s description, including any NPCs, hazards, or notable features.
+		System identifies and displays available actions based on the new location and the player’s current status or inventory.
 
 Alternative Flows
+	Player enters a hazard location and survives:
+		A2. System detects a hazard in the new location.
+		A3. System applies the hazard’s damage or effects to the player.
+		A4. System updates the player’s status to reflect the hazard’s impact.
+		A5. System checks if the player’s status is "alive."
+		A6. If alive, proceed to step 3 of the primary flow.
 
-	Player enters hazard location and does not die
+	Player enters a hazard location and dies:
+		A2. System detects a hazard in the new location.
+		A3. System applies the hazard’s damage or effects to the player.
+		A4. System updates the player’s status to reflect the hazard’s impact.
+		A5. System checks if the player’s status is "dead."
+		A6. If dead, proceed to A6.
+		A7. System displays a game-over message specific to the hazard in the location.
 
-		A2.	System detects a hazard in the new location
+	Player enters the goal location and wins:
+		A2. System detects a goal in the new location.
+		A3. System displays a win screen with a success message (e.g., "Congratulations! You’ve reached the treasure and completed your journey!").
 
-		A3.	System applies the damage from the hazard to the player
-
-		A4.	System updates player status
-
-		A5.	System checks the player status is alive
-
-		A6.	Return to primary flow step 3
-
-	Player enters hazard location and dies
-
-		A2.	System detects a hazard in the new location
-
-		A3.	System applies the damage from the hazard to the player
-
-		A4.	System updates player status
-
-		A5.	System checks the player status is dead
-
-		A6.	System displays game over message based on new location’s hazard
-
-	Player enters goal location and wins
-
-		A2.	System detects a goal in the new location
-
-		A3.	Display a win screen
-
+	NPCs spawn upon location change:
+		A2. System detects conditions that trigger NPCs to appear in the new location.
+		A3. System dynamically adds NPCs to the new location based on predefined logic:
+			Each NPC is initialized with its type (e.g., merchant, enemy, or chest) and corresponding interaction options.
+			System registers NPCs’ actions (e.g., "Talk to Merchant," "Attack Enemy") into the location’s available actions.
+		A4. System updates the location’s description to include the presence of NPCs (e.g., "A grumpy merchant is setting up shop here.").
+		A5. System displays the updated list of available actions for the player, including NPC interactions.

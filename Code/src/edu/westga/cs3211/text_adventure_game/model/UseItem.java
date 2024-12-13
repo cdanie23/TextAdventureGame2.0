@@ -35,7 +35,6 @@ public class UseItem extends ActionableItem {
 		return "Use " + this.getItem().getName();
 	}
 	
-	
 }
 
 

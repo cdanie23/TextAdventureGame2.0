@@ -26,6 +26,4 @@ Alternative Flows
 	
 		A2. System detects the item has already been taken or is otherwise unavailable. 
 		
-		A3. System displays a message indicating the item cannot be picked up. 
-		
 		A4. System returns to the primary flow's step 6. 

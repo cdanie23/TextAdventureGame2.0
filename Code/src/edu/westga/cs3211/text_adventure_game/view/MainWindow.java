@@ -17,7 +17,7 @@ import javafx.scene.control.TextArea;
 /**
  * Codebehind for the Main Window of the application.
  * 
- * @author Colby
+ * @author Colby, Jacob, and Kate
  * @version Fall 2024
  */
 public class MainWindow {
@@ -61,7 +61,7 @@ public class MainWindow {
 	
 	/**
 	 * Creates an instance of the main window for the text adventure game
-	 * @author Colby
+	 * @author Colby, Jacob, and Kate
 	 * @version Fall 2024
 	 */
 	public MainWindow() {
@@ -80,6 +80,23 @@ public class MainWindow {
 	public void initialize() {
 		this.bindPropertiesFromViewModel();
 		this.setupListeners();
+		this.checkActionsComboBoxState();
+	}
+	
+	/**
+	* Checks if the ComboBox has items and disables/enables it accordingly
+	* 
+	* @precondition none
+	* @postcondition none
+	*/
+	private void checkActionsComboBoxState() {
+	this.actionsComboBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+	       if (newValue == null) {
+	           this.takeActionButton.setDisable(true);
+	       } else {
+	           this.takeActionButton.setDisable(false);
+	       }
+	   });
 	}
 
 	@FXML

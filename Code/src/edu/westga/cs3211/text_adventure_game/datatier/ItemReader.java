@@ -9,7 +9,7 @@ import edu.westga.cs3211.text_adventure_game.model.Item;
 
 /**
  * The item reader class
- * @author Colby
+ * @author Colby, Jacob, and Kate
  * @version Fall 2024
  */
 public class ItemReader {

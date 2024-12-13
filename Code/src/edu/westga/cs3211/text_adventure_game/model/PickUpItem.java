@@ -2,7 +2,7 @@ package edu.westga.cs3211.text_adventure_game.model;
 
 /**
  * 	Pick up item action class
- * @author Colby
+ * @author Colby and Jacob
  * @version Fall 2024
  */
 public class PickUpItem extends ActionableItem {

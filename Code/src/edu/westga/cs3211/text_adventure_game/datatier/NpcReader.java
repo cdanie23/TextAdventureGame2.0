@@ -11,7 +11,7 @@ import edu.westga.cs3211.text_adventure_game.model.Npc;
  * The NPC reader class
  * Reads NPC data from a file and creates NPC objects.
  * 
- * @author Jacob
+ * @author Jacob, Kate, and Colby
  * @version Fall 2024
  */
 public class NpcReader {

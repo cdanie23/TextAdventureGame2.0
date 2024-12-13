@@ -158,11 +158,5 @@ public class NpcInteractTest {
 
          assertEquals(0, chestNpc.getHealth());
     }
-    public void testFightNpcWithWeapon() {
-    	Npc goblinNpc = new Npc("Goblin", 10, 50, 100);
-        NpcInteract fightInteraction = new NpcInteract(goblinNpc, "Fight the goblin");
-        
-        //TODO
-
-    }
+    
 }

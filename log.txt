@@ -1,0 +1,395 @@
+commit 88829674b3f5dec57ba598db7deeaffb449ea28c
+Merge: 43b53c1 e247e19
+Author: Kate Anglin <kanglin3@my.westga.edu>
+Date:   Thu Dec 12 23:39:44 2024 -0500
+
+    Merge pull request #12 from cdanie23/feature-ImplementCodeCoverage
+    
+    Feature implement code coverage
+
+commit e247e19957b7f3d44b02d768c17355ad0278d39b
+Author: Kate Anglin <kanglin3@my.westga.edu>
+Date:   Thu Dec 12 23:20:22 2024 -0500
+
+    Tested Some of Game Manager
+    
+    tested some of the game manager.
+
+commit 3225ba1daab9d2446155f08f007e64ad58326e54
+Author: Kate Anglin <kanglin3@my.westga.edu>
+Date:   Thu Dec 12 20:14:06 2024 -0500
+
+    Testing Actions partially
+    
+    getting 100 percent code coverage
+
+commit 763c81da6e1f049ceab22e56992c2ae26bd7480c
+Author: Kate Anglin <kanglin3@my.westga.edu>
+Date:   Thu Dec 12 19:48:47 2024 -0500
+
+    Move viewmodel test files
+    
+    moved the viewmodel test files to a more central location to test.
+
+commit c01e8ef12a97c6cce0ef086b7a182fb5b3fe1fd3
+Author: Kate Anglin <kanglin3@my.westga.edu>
+Date:   Thu Dec 12 19:40:17 2024 -0500
+
+    Moving testing files to central location
+    
+    moved the testing files to a central location.
+
+commit 1cb8589670504f9a7e5a5862b268661d55802b1f
+Author: Kate Anglin <kanglin3@my.westga.edu>
+Date:   Thu Dec 12 19:10:28 2024 -0500
+
+    Remove Helper Util
+    
+    the helper added unneccesary complexities. removed to give cleaner code.
+
+commit d5d2de0b0383bde26f1d4ccf9fbf8ad85ffb132d
+Author: Kate Anglin <kanglin3@my.westga.edu>
+Date:   Thu Dec 12 19:00:16 2024 -0500
+
+    Test reading locations and npcs
+    
+    tested reading location and tested reading npcs. both got 100 percent code coverage
+
+commit 77c895ef5e4d60ee9fd984e795d4ec2f258e994b
+Author: Kate Anglin <kanglin3@my.westga.edu>
+Date:   Thu Dec 12 18:45:27 2024 -0500
+
+    Tested the Item Reader
+    
+    Tested the item reader and game 100 percent coverage
+
+commit 43b53c16b5d09984bfc714b9f0e0c83649eae065
+Merge: db8a527 4ff35ae
+Author: Kate Anglin <kanglin3@my.westga.edu>
+Date:   Thu Dec 12 18:25:46 2024 -0500
+
+    Merge pull request #11 from cdanie23/feature-AddMerchantTrading
+    
+    Added the merchant trading
+
+commit 4ff35aec2ce7384083ab591533a7beb91d11cd19
+Author: Kate Anglin <kanglin3@my.westga.edu>
+Date:   Thu Dec 12 18:23:58 2024 -0500
+
+    Added the merchant trading
+    
+    Added the merchant trading to main. also made sure the the text
+    wrapping is on for the item status.
+
+commit db8a527725a23f0a0ba6f84afc698f26a41268b1
+Merge: d344634 73383c5
+Author: Jacob Baker <jb00645@my.westga.edu>
+Date:   Thu Dec 12 17:38:47 2024 -0500
+
+    Merge pull request #10 from cdanie23/feature-AddingNpcToWorld
+    
+    Feature adding npc to world
+
+commit 73383c51fd711fb85774420a6c8f274ee1f18e69
+Author: Jacob Baker <jb00645@my.westga.edu>
+Date:   Thu Dec 12 17:30:33 2024 -0500
+
+    Altered some minor bugs
+    
+    Some minor issues appeared before push... needing fixxing before merge... Done!
+
+commit b139536cbe48c9bba267147b3a8da5ef26590da3
+Author: Jacob Baker <jb00645@my.westga.edu>
+Date:   Thu Dec 12 17:07:07 2024 -0500
+
+    Added NPC to World and Movement
+    
+    Implemented the NPC to be able to be added to the locations, and if the player goes back
+    there is a chance for a new NPC to be added (aka moving into room). This also implemented
+    the random map generation.
+
+commit d3446348afe82926f7cb97c447edfeed43dbf5fd
+Author: Colby Daniel <cdanie23@my.westga.edu>
+Date:   Tue Dec 10 18:37:13 2024 -0500
+
+    Adds 100% test coverage
+
+commit f75b654d43782c6ff9b5304ca4ad4e30c4e56ae9
+Merge: d820af7 a548208
+Author: cdanie23 <165082439+cdanie23@users.noreply.github.com>
+Date:   Tue Dec 10 17:28:02 2024 -0500
+
+    Merge pull request #9 from cdanie23/feature-PickUpAndDropItems
+    
+    Feature pick up and drop items
+
+commit a5482087c87530c64e5553a05572138b26e14725
+Merge: 715f194 d820af7
+Author: Colby Daniel <cdanie23@my.westga.edu>
+Date:   Tue Dec 10 17:22:25 2024 -0500
+
+    Merge branch 'main' of https://github.com/cdanie23/TextAdventureGame2.0 into feature-PickUpAndDropItems
+
+commit 715f194a30b152476b6e1c050ddb29363d2dea9c
+Author: Colby Daniel <cdanie23@my.westga.edu>
+Date:   Tue Dec 10 17:01:12 2024 -0500
+
+    Added functionality to pick up items if player dropped. Added functionality for chest items to be dropped and stored in location.
+
+commit d820af7e8f77df6ad170a98fc01ae2461743bcbd
+Merge: 2066b25 62ec4a8
+Author: Kate Anglin <kanglin3@my.westga.edu>
+Date:   Tue Dec 10 15:32:25 2024 -0500
+
+    Merge pull request #8 from cdanie23/feature-FixBugWeaponAddsHealth
+    
+    FixBugWeaponAddsHealth
+
+commit 62ec4a8eecf604e82c63c81a4cb3e1e0362f4bfc
+Author: Kate Anglin <kanglin3@my.westga.edu>
+Date:   Tue Dec 10 15:30:56 2024 -0500
+
+    FixBugWeaponAddsHealth
+    
+    Fixed the bug also tested for the bug to not happen again.
+    Also tested some code that had not been tested.
+
+commit 2066b251db03933718b88cf80c53f9e2a4ba3031
+Merge: 7e60be7 b9552ca
+Author: cdanie23 <165082439+cdanie23@users.noreply.github.com>
+Date:   Mon Dec 9 18:53:50 2024 -0500
+
+    Merge pull request #5 from cdanie23/implement-NPC
+    
+    Adds testing for the npc reader
+
+commit b9552ca9194d821ec9c7d1602f3e761c138cc657
+Merge: 3191484 7e60be7
+Author: cdanie23 <165082439+cdanie23@users.noreply.github.com>
+Date:   Mon Dec 9 18:53:31 2024 -0500
+
+    Merge branch 'main' into implement-NPC
+
+commit 319148436532dbe882f271a3d107ece3e83f469d
+Author: Colby Daniel <cdanie23@my.westga.edu>
+Date:   Mon Dec 9 18:51:37 2024 -0500
+
+    Adds testing for the npc reader
+
+commit 7e60be7c110e66aa988090344ad790e08b6475b2
+Author: Colby Daniel <cdanie23@my.westga.edu>
+Date:   Mon Dec 9 18:36:51 2024 -0500
+
+    Solved GUI bug
+
+commit 16c408a7ad2901fd02b2ca3903f72bfb8f7bb4a1
+Merge: c6b1919 7d5ac53
+Author: cdanie23 <165082439+cdanie23@users.noreply.github.com>
+Date:   Mon Dec 9 18:16:58 2024 -0500
+
+    Merge pull request #4 from cdanie23/feature-ImplementItems
+    
+    Feature implement items testing
+
+commit 7d5ac53980b9a06572a428eb96817e5fba2d206b
+Merge: 9e4d02b c6b1919
+Author: cdanie23 <165082439+cdanie23@users.noreply.github.com>
+Date:   Mon Dec 9 18:16:44 2024 -0500
+
+    Merge branch 'main' into feature-ImplementItems
+
+commit 9e4d02b0172eec723900ad47a58e28043c5568ee
+Author: Colby Daniel <cdanie23@my.westga.edu>
+Date:   Mon Dec 9 18:09:00 2024 -0500
+
+    Adds testing for the item reader
+
+commit c6b1919d30e1171aa80e254a91e705de61afe62b
+Merge: b5a6b0a 9532122
+Author: Kate Anglin <kanglin3@my.westga.edu>
+Date:   Mon Dec 9 14:12:12 2024 -0500
+
+    Merge pull request #3 from cdanie23/feature-RefactorItemsWithNPC
+    
+    Feature refactor items with npc
+
+commit 9532122a6de02f14133923e252d86799f93406bc
+Author: Kate Anglin <kanglin3@my.westga.edu>
+Date:   Mon Dec 9 13:29:07 2024 -0500
+
+    Added the ability for NPC to fight back
+    
+    when the player interacts with the NPC and it is not
+    defeated the enemy will hurt the player as well.
+
+commit fde099b04b395b050a26e8d333d6668cb3f3fea1
+Author: Kate Anglin <kanglin3@my.westga.edu>
+Date:   Mon Dec 9 13:14:08 2024 -0500
+
+    Added testing for fighting the NpcInteract
+    
+    Also added the GUI to have the text wrapped and made the ability
+    to show the health of the npc you are fighting.
+
+commit e436940e92ffefc65eef527bf2019b836064fb84
+Author: Kate Anglin <kanglin3@my.westga.edu>
+Date:   Mon Dec 9 12:45:31 2024 -0500
+
+    Added the ability to defeat Npcs
+    
+    Made the player able to equipe items to provide more
+    damage when attacking and also add the ability to defeat an
+    enemy and get the coins from killing them.
+
+commit ca6d7491bee5e4512f67bbf4cc474ca33ee0f441
+Author: Kate Anglin <kanglin3@my.westga.edu>
+Date:   Mon Dec 9 11:38:12 2024 -0500
+
+    Added Ability to DamageNpcWithItems
+    
+    Tested the ability but did not add the loot to the player when
+    the player dies or take away the action assosiated with the npc
+    on the location. Got 100% test coverage over what is implemented now.
+
+commit a61437ed86e7f7268db23aebe70c3ce2f6128f7e
+Author: Kate Anglin <kanglin3@my.westga.edu>
+Date:   Mon Dec 9 10:06:37 2024 -0500
+
+    Allowed player to see Weight
+    
+    Binded the veiwmodel weight property to the GUI.
+    To allow the player to see how much weight of
+    inventory they have.
+
+commit d2b02c11e20a6bcc39e31c0871b3cb365e959075
+Author: Colby Daniel <cdanie23@my.westga.edu>
+Date:   Sun Dec 8 21:48:02 2024 -0500
+
+    Adds testing for interacting with the chest and ensuring items enter the inventory. Adds functionality to add a random number of random items from the item pool to chests.
+
+commit b5a6b0a13c6a0b8b98204c39ff4741f8a6bc7e82
+Author: Colby Daniel <cdanie23@my.westga.edu>
+Date:   Sun Dec 8 16:51:09 2024 -0500
+
+    Fixes a merge resolve error
+
+commit 5a41d8fa71c104ff4ac2b390d62f643829359457
+Author: Colby Daniel <cdanie23@my.westga.edu>
+Date:   Sun Dec 8 16:41:15 2024 -0500
+
+    merge GUI conflict resolve
+
+commit 5912777488e8dc878907cd5a81a9fe0decc9bad7
+Merge: 6635886 1eb45d4
+Author: cdanie23 <165082439+cdanie23@users.noreply.github.com>
+Date:   Sun Dec 8 16:37:32 2024 -0500
+
+    Merge pull request #1 from cdanie23/implement-NPC
+    
+    Implemented Most Of NPC
+
+commit 1eb45d4a37e25263ecdb9c216096842e010cb764
+Merge: a431a29 6635886
+Author: cdanie23 <165082439+cdanie23@users.noreply.github.com>
+Date:   Sun Dec 8 16:37:11 2024 -0500
+
+    Merge branch 'main' into implement-NPC
+
+commit 663588615b998e81f1140cf691345b0506590c09
+Merge: 3885452 a7e950c
+Author: cdanie23 <165082439+cdanie23@users.noreply.github.com>
+Date:   Sun Dec 8 16:32:52 2024 -0500
+
+    Merge pull request #2 from cdanie23/feature-ImplementItems
+    
+    Feature implement items
+
+commit a7e950cdc2ad85cd5cda9a4beddd7a19f9b9a280
+Author: Colby Daniel <cdanie23@my.westga.edu>
+Date:   Sun Dec 8 16:20:24 2024 -0500
+
+    Adds an encumbered status and coins field to the player. Updates GUI to display the current location's name.
+
+commit dd623720e2a16490bf200000675434f65bfa8297
+Author: Colby Daniel <cdanie23@my.westga.edu>
+Date:   Sun Dec 8 14:30:45 2024 -0500
+
+    Update use item and drop item use case scenarios. Adds item status label.
+    
+    Adds the base for the player to become encumbered still needs implementation and testing.
+
+commit a431a2985d9edd2862cee8d6304491f899cb4c1b
+Author: Jacob Baker <jb00645@my.westga.edu>
+Date:   Sun Dec 8 03:07:17 2024 -0500
+
+    Implemented Most Of NPC
+    
+    I created and started the NPCs and turned them into actions that can be taken by the user. For
+    now, they do not interact well with the Items class, but the NPCs are able to carry items. The
+    player's inventory needs to be implemented before further development can proceed.
+
+commit 3885452a0d7a40bddc154ae588c221a9586daeba
+Author: Colby Daniel <cdanie23@my.westga.edu>
+Date:   Sat Dec 7 17:09:45 2024 -0500
+
+    Adds functinality for items in the game
+    
+    Adds the ability to drop items from the inventory and use health potions
+
+commit 3b2d649000e179558573c7344fc18faac63a349b
+Author: Colby Daniel <cdanie23@my.westga.edu>
+Date:   Wed Dec 4 20:04:45 2024 -0500
+
+    Adds Item partial functionality
+    
+    Adds the Use Item and Drop Item action in the actions combo box when selected. Adds functionality to select items from the inventory for use.
+
+commit 8dfa54bff24730239a24665076c196da1724603c
+Author: Colby Daniel <cdanie23@my.westga.edu>
+Date:   Tue Dec 3 18:45:25 2024 -0500
+
+    Implemented Items partially
+    
+    Created the Item text file, the item reader, and item model.
+
+commit 6d79d020e3679ede6913cf434734b8e2ad506565
+Author: Kate Anglin <kanglin3@my.westga.edu>
+Date:   Thu Nov 21 17:41:20 2024 -0500
+
+    Added image files for diagrams
+    
+    Added the image files for the UML class diagram and the
+    UseCaseDiagram.
+
+commit d015aa84d621ee7df59b185f79798ab4c949883b
+Author: Kate Anglin <kanglin3@my.westga.edu>
+Date:   Thu Nov 21 17:32:16 2024 -0500
+
+    Updated Documentation
+    
+    Uploaded the class diagram and put names to the sprint backlog.
+    Updated the use case scenarios to not have the player be able to
+    generate a new world as an action but for the system to do this
+    automatically.
+
+commit 2df0c81dd72c45908df4a6cc1e74a956b71dc090
+Author: Kate Anglin <kanglin3@my.westga.edu>
+Date:   Thu Nov 21 12:29:51 2024 -0500
+
+    Updated UI Wireframe
+    
+    Updated the UI Wireframe and changed the GUI in the MainWindow.fxml file.
+    Commented out code that would break the system from the old GUI.
+
+commit 4a68533518f347956c9f7d4c04d156a3e22b0866
+Author: Colby Daniel <cdanie23@my.westga.edu>
+Date:   Wed Nov 20 16:25:45 2024 -0500
+
+    Intitial setup of the documentation and the base project. Adds UI Wireframe, Use Case Scenarios, Use Case Diagram,
+    Product Backlog, Sprint Backlog, and base project from 1.0 text adventure game.
+
+commit c7bcd0335a6d7ea36ad6c8adf47f655d150c9ff6
+Author: cdanie23 <165082439+cdanie23@users.noreply.github.com>
+Date:   Wed Nov 20 16:19:40 2024 -0500
+
+    Initial commit

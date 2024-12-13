@@ -1,33 +1,16 @@
 Drop Item at Location 
 
-
 Context 
 
 	Player has one or more items in their inventory. 
-	Player is in a location where dropping items is allowed. 
+	Player is in a location where dropping items is allowed.
 
 Primary Flow 
 
-	1. User selects an item from their inventory. 
-	
+	1. User selects an item from their inventory.
 	2. User selects to drop the item
-	
-	3. System removes the item from the player’s inventory. 
-	
+	3. System removes the item from the player’s inventory.
 	4. System removes all use actions on the item dropped
-	
-	3. System adds the item to the current location. 
-	
-	4. System displays a message confirming the item was dropped. 
-	
-	5. System updates the list of available actions in the location. 
-
-Alternative Flows 
-
-	Dropping the item is not allowed at the current location: 
-	
-		A2. System determines the location does not allow items to be dropped (e.g., hazardous area, NPC-specific zone). 
-		
-		A3. System displays a message indicating that dropping items is not allowed here. 
-		
-		A4. System returns to the primary flow's step 5. 
+	3. System adds the item to the current location.
+	4. System displays a message confirming the item was dropped.
+	5. System updates the list of available actions in the location.

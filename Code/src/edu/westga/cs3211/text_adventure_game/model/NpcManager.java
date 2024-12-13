@@ -7,7 +7,7 @@ import java.util.Random;
 /**
  * This manages the Npc creation and adding them into the action list avaliable
  * 
- * @author Jacob
+ * @author Jacob and Kate
  * @version Fall 2024
  */
 public class NpcManager {
