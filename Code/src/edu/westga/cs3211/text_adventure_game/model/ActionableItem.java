@@ -28,11 +28,6 @@ public abstract class ActionableItem extends Action {
 	 */
 	public abstract Boolean takeAction(Damageable character, Location currLocation);
 
-	@Override
-	public String toString() {
-		return super.getDescription();
-	}
-
 	/**
 	 * Gets the item
 	 * @return the item
