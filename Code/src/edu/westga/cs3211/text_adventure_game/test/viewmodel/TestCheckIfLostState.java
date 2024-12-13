@@ -1,4 +1,4 @@
-package edu.westga.cs3211.text_adventure_game.viewmodel.test.textadventuregameviewmodel;
+package edu.westga.cs3211.text_adventure_game.test.viewmodel;
 
 import static org.junit.jupiter.api.Assertions.*;
 
