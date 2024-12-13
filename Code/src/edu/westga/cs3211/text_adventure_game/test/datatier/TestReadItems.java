@@ -1,4 +1,4 @@
-package edu.westga.cs3211.text_adventure_game.test.datatier.itemreader;
+package edu.westga.cs3211.text_adventure_game.test.datatier;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
